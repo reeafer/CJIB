@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alle Functies - Centraal Justitieel Incassobureau</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background: #f5f5f5;
+        }
+        /* Header */
+        .header {
+            background: white;
+            padding: 20px 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .logo {
+            width: 60px;
+            height: 70px;
+            background: #003d7a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .logo svg {
+            width: 40px;
+            height: 40px;
+            fill: white;
+        }
+        .header-text h1 {
+            font-size: 19px;
+            color: #1a1a1a;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .header-text p {
+            font-size: 13px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Navigation */
+        .navbar {
+            background: #c6b8cf;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0;
+        }
+        .nav-left {
+            display: flex;
+            align-items: center;
+        }
+        .nav-item {
+            padding: 12px 24px;
+            color: #1a1a1a;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .nav-item:hover {
+            background: rgba(0,0,0,0.05);
+        }
+        .nav-item.active {
+            background: rgba(0,0,0,0.1);
+            font-weight: 600;
+        }
+        .home-icon {
+            font-size: 28px;
+            padding: 8px 24px;
+            cursor: pointer;
+            background: white;
+        }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            padding-right: 30px;
+        }
+        .nav-right-item {
+            color: #1a1a1a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        /* Main Layout */
+        .main-layout {
+            display: flex;
+            height: calc(100vh - 130px);
+        }
+        /* Sidebar */
+        .sidebar {
+            width: 350px;
+            background: white;
+            border-right: 1px solid #ddd;
+            display: flex;
+            flex-direction: column;
+        }
+        .search-box {
+            padding: 20px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #f9f9f9;
+        }
+        .search-box span {
+            flex: 1;
+            font-size: 14px;
+            color: #333;
+            font-weight: 500;
+        }
+        .search-box button {
+            background: transparent;
+            color: #333;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        .function-list {
+            flex: 1;
+            overflow-y: auto;
+        }
+        .function-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.2s;
+            background: white;
+        }
+        .function-item:hover {
+            background: #f5f5f5;
+        }
+        .function-item.active {
+            background: #582f71;
+            color: white;
+        }
+        .function-item span {
+            font-size: 15px;
+        }
+        .function-arrow {
+            font-size: 18px;
+        }
+        /* Content Area */
+        .content-area {
+            flex: 1;
+            background: #e8e8e8;
+            position: relative;
+            overflow: hidden;
+        }
+        .background-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.5;
+        }
+        .content-card {
+            position: absolute;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 400px;
+            background: #582f71;
+            color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+        .content-header {
+            padding: 25px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .content-header h2 {
+            font-size: 32px;
+            font-weight: 600;
+        }
+        .bookmark-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .bookmark-text {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+        .bookmark-icon {
+            font-size: 24px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .bookmark-icon:hover {
+            opacity: 0.7;
+        }
+        .content-section {
+            padding: 25px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        .content-section:last-of-type {
+            border-bottom: none;
+        }
+        .content-section h3 {
+            font-size: 16px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        .content-section p {
+            font-size: 14px;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+        .content-footer {
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0,0,0,0.1);
+        }
+        .content-footer span {
+            font-size: 14px;
+        }
+        .mbo-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-layout {
+                flex-direction: column;
+                height: auto;
+            }
+            .sidebar {
+                width: 100%;
+                max-height: 400px;
+            }
+            .content-area {
+                min-height: 500px;
+            }
+            .content-card {
+                position: static;
+                transform: none;
+                width: 90%;
+                margin: 40px auto;
+            }
+        }
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .nav-left,
+            .nav-right {
+                width: 100%;
+                flex-wrap: wrap;
+            }
+            .nav-right {
+                padding-left: 24px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+            .sidebar {
+                max-height: 300px;
+            }
+            .content-card {
+                width: 95%;
+                margin: 20px auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-left">
+            <div class="logo">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                </svg>
+            </div>
+            <div class="header-text">
+                <h1>Centraal Justitieel Incassobureau</h1>
+                <p>Ministerie van Justitie en Veiligheid</p>
+            </div>
+        </div>
+    </div>
+    <!-- Navigation -->
+    <div class="navbar">
+        <div class="nav-left">
+            <a href="index.html" style="text-decoration: none; color: inherit;">
+                <div class="home-icon">🏠</div>
+            </a>
+            <a href="overons.html" style="text-decoration: none; color: inherit;">
+                <div class="nav-item">over ons</div>
+            </a>
+            <div class="nav-item active">alle functies binnen cjib</div>
+            <div class="nav-item">Rol: gebruiker</div>
+        </div>
+        <div class="nav-right">
+            <div class="nav-right-item">instellingen ⚙️</div>
+            <div class="nav-right-item">🇳🇱 NL</div>
+        </div>
+    </div>
+    <!-- Main Layout -->
+    <div class="main-layout">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="search-box">
+                <span>zoek filters</span>
+                <button>↓</button>
+            </div>
+            <div class="function-list">
+                <div class="function-item active" data-function="1">
+                    <span>functie 1</span>
+                    <span class="function-arrow">→</span>
+                </div>
+                <div class="function-item" data-function="2">
+                    <span>functie 2</span>
+                    <span class="function-arrow">→</span>
+                </div>
+                <div class="function-item" data-function="3">
+                    <span>functie 3</span>
+                    <span class="function-arrow">→</span>
+                </div>
+                <div class="function-item" data-function="4">
+                    <span>functie 4</span>
+                    <span class="function-arrow">→</span>
+                </div>
+                <div class="function-item" data-function="5">
+                    <span>functie 5</span>
+                    <span class="function-arrow">→</span>
+                </div>
+                <div class="function-item" data-function="6">
+                    <span>functie 6</span>
+                    <span class="function-arrow">→</span>
+                </div>
+                <div class="function-item" data-function="7">
+                    <span>functie 7</span>
+                    <span class="function-arrow">→</span>
+                </div>
+                <div class="function-item" data-function="8">
+                    <span>functie 8</span>
+                    <span class="function-arrow">→</span>
+                </div>
+                <div class="function-item" data-function="9">
+                    <span>functie 9</span>
+                    <span class="function-arrow">→</span>
+                </div>
+                <div class="function-item" data-function="10">
+                    <span>functie 10</span>
+                    <span class="function-arrow">→</span>
+                </div>
+            </div>
+        </div>
+        <!-- Content Area -->
+        <div class="content-area">
+            <img src="data:image/svg+xml,%3Csvg width='1000' height='800' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23d5d5d5;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%23e8e8e8;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23g)'/%3E%3C/svg%3E" alt="Background" class="background-image">
+            <div class="content-card">
+                <div class="content-header">
+                    <h2>functie</h2>
+                    <div class="bookmark-section">
+                        <span class="bookmark-text">functie opslaan</span>
+                        <span class="bookmark-icon">🔖</span>
+                    </div>
+                </div>
+                <div class="content-section">
+                    <h3>beschrijving</h3>
+                    <p>consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                </div>
+                <div class="content-section">
+                    <h3>benodigdheden</h3>
+                    <p>consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                </div>
+                <div class="content-footer">
+                    <span>opleiding</span>
+                    <span class="mbo-badge">MBO</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Function item click handling
+        const functionItems = document.querySelectorAll('.function-item');
+        const contentCard = document.querySelector('.content-card');
+        
+        functionItems.forEach(item => {
+            item.addEventListener('click', function() {
+                functionItems.forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Optional: Add animation effect
+                contentCard.style.opacity = '0.8';
+                setTimeout(() => {
+                    contentCard.style.opacity = '1';
+                }, 100);
+            });
+        });
+        
+        // Bookmark toggle
+        const bookmarkIcon = document.querySelector('.bookmark-icon');
+        let isBookmarked = false;
+        
+        bookmarkIcon.addEventListener('click', function() {
+            isBookmarked = !isBookmarked;
+            this.style.opacity = isBookmarked ? '0.6' : '1';
+        });
+    </script>
+</body>
+</html>
