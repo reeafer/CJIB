@@ -387,7 +387,7 @@
             <img src="data:image/svg+xml,%3Csvg width='1000' height='800' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23d5d5d5;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%23e8e8e8;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23g)'/%3E%3C/svg%3E" alt="Background" class="background-image">
             <div class="content-card">
                 <div class="content-header">
-                    <h2>Medewerker Administratie</h2>
+                    <h2></h2>
                     <div class="bookmark-section">
                         <span class="bookmark-text">functie opslaan</span>
                         <span class="bookmark-icon">🔖</span>
@@ -410,31 +410,101 @@
     </div>
     
     <script>
-        // Function item click handling
-        const functionItems = document.querySelectorAll('.function-item');
-        const contentCard = document.querySelector('.content-card');
-        
-        functionItems.forEach(item => {
-            item.addEventListener('click', function() {
-                functionItems.forEach(i => i.classList.remove('active'));
-                this.classList.add('active');
-                
-                // Optional: Add animation effect
-                contentCard.style.opacity = '0.8';
-                setTimeout(() => {
-                    contentCard.style.opacity = '1';
-                }, 100);
-            });
-        });
-        
-        // Bookmark toggle
-        const bookmarkIcon = document.querySelector('.bookmark-icon');
-        let isBookmarked = false;
-        
-        bookmarkIcon.addEventListener('click', function() {
-            isBookmarked = !isBookmarked;
-            this.style.opacity = isBookmarked ? '0.6' : '1';
-        });
-    </script>
+const functies = {
+  1: {
+    titel: "Medewerker Administratie",
+    beschrijving: "Verantwoordelijk voor het verwerken, controleren en bijhouden van administratieve en financiële gegevens binnen het CJIB.",
+    benodigd: "Nauwkeurig werken, administratieve vaardigheden, omgaan met computersystemen.",
+    opleiding: "MBO"
+  },
+  2: {
+    titel: "Juridisch Medewerker",
+    beschrijving: "Ondersteunt bij juridische processen zoals het controleren van dossiers en het behandelen van bezwaren.",
+    benodigd: "Kennis van wet- en regelgeving, analytisch vermogen.",
+    opleiding: "HBO"
+  },
+  3: {
+    titel: "Klantenservice Medewerker",
+    beschrijving: "Beantwoordt vragen van burgers over boetes, betalingen en procedures.",
+    benodigd: "Communicatief sterk, klantgericht.",
+    opleiding: "MBO"
+  },
+  4: {
+    titel: "Behandelaar Bezwaar",
+    beschrijving: "Beoordeelt ingediende bezwaren en neemt beslissingen volgens vastgestelde regels.",
+    benodigd: "Analytisch denken, nauwkeurigheid.",
+    opleiding: "HBO"
+  },
+  5: {
+    titel: "Financieel Medewerker",
+    beschrijving: "Beheert en controleert financiële transacties en betalingen.",
+    benodigd: "Cijfermatig inzicht, nauwkeurig werken.",
+    opleiding: "MBO"
+  },
+  6: {
+    titel: "ICT Support Medewerker",
+    beschrijving: "Ondersteunt medewerkers bij technische problemen met systemen en software.",
+    benodigd: "Technisch inzicht, probleemoplossend vermogen.",
+    opleiding: "MBO"
+  },
+  7: {
+    titel: "Data Analist",
+    beschrijving: "Analyseert gegevens om processen en prestaties inzichtelijk te maken.",
+    benodigd: "Analytisch sterk, werken met data.",
+    opleiding: "HBO"
+  },
+  8: {
+    titel: "Teamleider",
+    beschrijving: "Stuurt een team aan en bewaakt de kwaliteit en voortgang van het werk.",
+    benodigd: "Leidinggevende vaardigheden, overzicht.",
+    opleiding: "HBO"
+  },
+  9: {
+    titel: "Communicatie Medewerker",
+    beschrijving: "Verzorgt interne en externe communicatie van de organisatie.",
+    benodigd: "Goede taalvaardigheid, duidelijk communiceren.",
+    opleiding: "HBO"
+  },
+  10: {
+    titel: "HR Medewerker",
+    beschrijving: "Ondersteunt personeelszaken zoals administratie en begeleiding van medewerkers.",
+    benodigd: "Organisatorisch sterk, sociaal.",
+    opleiding: "MBO"
+  }
+};
+
+const functionItems = document.querySelectorAll('.function-item');
+const titel = document.querySelector('.content-header h2');
+const beschrijving = document.querySelectorAll('.content-section p')[0];
+const benodigd = document.querySelectorAll('.content-section p')[1];
+const opleiding = document.querySelector('.mbo-badge');
+
+function laadFunctie(id) {
+  titel.textContent = functies[id].titel;
+  beschrijving.textContent = functies[id].beschrijving;
+  benodigd.textContent = functies[id].benodigd;
+  opleiding.textContent = functies[id].opleiding;
+}
+
+functionItems.forEach(item => {
+  item.addEventListener('click', function() {
+    functionItems.forEach(i => i.classList.remove('active'));
+    this.classList.add('active');
+    laadFunctie(this.dataset.function);
+  });
+});
+
+// standaard functie 1
+laadFunctie(1);
+
+// bookmark blijft werken
+const bookmarkIcon = document.querySelector('.bookmark-icon');
+let isBookmarked = false;
+bookmarkIcon.addEventListener('click', function () {
+  isBookmarked = !isBookmarked;
+  this.style.opacity = isBookmarked ? '0.6' : '1';
+});
+</script>
+
 </body>
 </html>
