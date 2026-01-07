@@ -467,9 +467,101 @@
             right: -5px;
             transform: rotate(45deg);
         }
+        
+        /* ===== INSTELLINGEN POPUP ===== */
+        .settings-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .settings-popup {
+            width: 720px;
+            max-width: 90%;
+            background: #5b2d6f;
+            color: white;
+            padding: 50px;
+            border-radius: 10px;
+        }
+
+        .settings-popup h1 {
+            font-size: 42px;
+            margin-bottom: 30px;
+        }
+
+        .settings-popup label {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 6px;
+        }
+
+        .settings-popup input[type="email"],
+        .settings-popup input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border-radius: 4px;
+            border: none;
+        }
+
+        .darkmode-row {
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .settings-popup button {
+            margin-top: 40px;
+            padding: 10px 20px;
+            background: #d1c4d9;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        /* DARK MODE */
+        body.dark {
+            background: #1e1e1e;
+        }
+        
+        body.dark .header {
+            background: #2d2d2d;
+        }
+        
+        body.dark .header-text h1 {
+            color: #e0e0e0;
+        }
+        
+        body.dark .header-text p {
+            color: #b0b0b0;
+        }
     </style>
 </head>
 <body>
+    <!-- INSTELLINGEN POPUP -->
+    <div class="settings-overlay" id="settingsOverlay">
+        <div class="settings-popup">
+            <h1>Instellingen</h1>
+
+            <label>E-mail wijzigen</label>
+            <input type="email" placeholder="nieuw e-mail">
+
+            <label>Telefoonnummer</label>
+            <input type="text" placeholder="nieuw nummer">
+
+            <div class="darkmode-row">
+                <span>Darkmode</span>
+                <input type="checkbox" id="darkToggle">
+            </div>
+
+            <button id="closeSettings">return</button>
+        </div>
+    </div>
+
     <!-- Header -->
     <div class="header">
         <div class="logo">
@@ -485,12 +577,11 @@
     <div class="navbar">
         <div class="nav-left">
             <div class="home-icon">🏠</div>
-         
             <div class="nav-item"><a href="functies.html">Alle functies binnen CJIB</a></div>
             <div class="nav-item">Rol: gebruiker</div>
         </div>
         <div class="nav-right">
-            <div class="nav-right-item">Instellingen ⚙️</div>
+            <div class="nav-right-item" id="openSettings">Instellingen ⚙️</div>
             <div class="nav-right-item">NL</div>
             <div class="nav-right-item" onclick="window.location.href='login.html'" style="cursor: pointer;">
                 Inloggen
@@ -538,7 +629,7 @@
                 <button class="menu-button">jouw vervolg stap</button>
                 <button class="menu-button">route planner</button>
                 <button class="menu-button">opgeslagen functies</button>
-                <button class="menu-button" onclick="window.open('https://www.cjib.nl/over-ons/wat-is-het-cjib', '_blank')">CJIB Over ons </button>
+                <button class="menu-button" onclick="window.open('https://www.cjib.nl/over-ons/wat-is-het-cjib', '_blank')">CJIB Over ons</button>
             </div>
             
             <div class="illustration">
@@ -563,5 +654,25 @@
             </div>
         </div>
     </div>
+
+    <!-- JavaScript verplaatst naar het einde -->
+    <script>
+        const openBtn = document.getElementById('openSettings');
+        const closeBtn = document.getElementById('closeSettings');
+        const overlay = document.getElementById('settingsOverlay');
+        const darkToggle = document.getElementById('darkToggle');
+
+        openBtn.onclick = () => {
+            overlay.style.display = 'flex';
+        };
+
+        closeBtn.onclick = () => {
+            overlay.style.display = 'none';
+        };
+
+        darkToggle.onchange = () => {
+            document.body.classList.toggle('dark');
+        };
+    </script>
 </body>
 </html>
