@@ -135,6 +135,21 @@
             cursor: pointer;
             font-size: 20px;
         }
+        .add-function-btn {
+            margin: 15px 20px;
+            padding: 12px 20px;
+            background: #582f71;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        .add-function-btn:hover {
+            background: #6d3a8a;
+        }
         .function-list {
             flex: 1;
             overflow-y: auto;
@@ -251,6 +266,82 @@
             font-size: 13px;
             font-weight: 600;
         }
+        /* Popup Overlay */
+        .popup-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        .popup-form {
+            width: 600px;
+            max-width: 90%;
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .popup-form h2 {
+            font-size: 28px;
+            color: #582f71;
+            margin-bottom: 25px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+        .form-group textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        .form-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .form-buttons button {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-submit {
+            background: #582f71;
+            color: white;
+        }
+        .btn-submit:hover {
+            background: #6d3a8a;
+        }
+        .btn-cancel {
+            background: #e0e0e0;
+            color: #333;
+        }
+        .btn-cancel:hover {
+            background: #d0d0d0;
+        }
         /* Responsive */
         @media (max-width: 1024px) {
             .main-layout {
@@ -339,6 +430,7 @@
                 <span>zoek filters</span>
                 <button>↓</button>
             </div>
+            <button class="add-function-btn" id="addFunctionBtn">➕ Nieuwe functie toevoegen</button>
             <div class="function-list" id="functionList">
                 <!-- Functies worden hier dynamisch geladen -->
             </div>
@@ -367,6 +459,40 @@
                     <span class="mbo-badge"></span>
                 </div>
             </div>
+        </div>
+    </div>
+    
+    <!-- Popup voor nieuwe functie -->
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup-form">
+            <h2>Nieuwe functie aanmaken</h2>
+            <form id="newFunctionForm">
+                <div class="form-group">
+                    <label>Functie titel *</label>
+                    <input type="text" id="functieTitel" placeholder="Bijv. Software Developer" required>
+                </div>
+                <div class="form-group">
+                    <label>Beschrijving *</label>
+                    <textarea id="functieBeschrijving" placeholder="Wat zijn de hoofdtaken van deze functie?" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Benodigdheden *</label>
+                    <textarea id="functieBenodigdheden" placeholder="Welke opleiding en vaardigheden zijn nodig?" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Opleiding niveau *</label>
+                    <select id="functieOpleiding" required>
+                        <option value="">Kies een niveau</option>
+                        <option value="MBO">MBO</option>
+                        <option value="HBO">HBO</option>
+                        <option value="WO">WO</option>
+                    </select>
+                </div>
+                <div class="form-buttons">
+                    <button type="button" class="btn-cancel" id="cancelBtn">Annuleren</button>
+                    <button type="submit" class="btn-submit">Functie toevoegen</button>
+                </div>
+            </form>
         </div>
     </div>
     
@@ -434,25 +560,46 @@ const functies = {
   }
 };
 
-// Genereer de functie items dynamisch
+// Element referenties
 const functionList = document.getElementById('functionList');
-Object.keys(functies).forEach(id => {
-  const div = document.createElement('div');
-  div.className = 'function-item';
-  div.dataset.function = id;
-  div.innerHTML = `
-    <span>${functies[id].titel}</span>
-    <span class="function-arrow">→</span>
-  `;
-  functionList.appendChild(div);
-});
-
-const functionItems = document.querySelectorAll('.function-item');
 const titel = document.querySelector('.content-header h2');
 const beschrijving = document.querySelectorAll('.content-section p')[0];
 const benodigd = document.querySelectorAll('.content-section p')[1];
 const opleiding = document.querySelector('.mbo-badge');
+const addFunctionBtn = document.getElementById('addFunctionBtn');
+const popupOverlay = document.getElementById('popupOverlay');
+const cancelBtn = document.getElementById('cancelBtn');
+const newFunctionForm = document.getElementById('newFunctionForm');
 
+// Functie om lijst te renderen
+function renderFuncties() {
+  functionList.innerHTML = '';
+  Object.keys(functies).forEach(id => {
+    const div = document.createElement('div');
+    div.className = 'function-item';
+    div.dataset.function = id;
+    div.innerHTML = `
+      <span>${functies[id].titel}</span>
+      <span class="function-arrow">→</span>
+    `;
+    functionList.appendChild(div);
+  });
+  addClickListeners();
+}
+
+// Voeg click listeners toe aan functie items
+function addClickListeners() {
+  const functionItems = document.querySelectorAll('.function-item');
+  functionItems.forEach(item => {
+    item.addEventListener('click', function() {
+      document.querySelectorAll('.function-item').forEach(i => i.classList.remove('active'));
+      this.classList.add('active');
+      laadFunctie(this.dataset.function);
+    });
+  });
+}
+
+// Laad functie details
 function laadFunctie(id) {
   titel.textContent = functies[id].titel;
   beschrijving.textContent = functies[id].beschrijving;
@@ -460,19 +607,59 @@ function laadFunctie(id) {
   opleiding.textContent = functies[id].opleiding;
 }
 
-functionItems.forEach(item => {
-  item.addEventListener('click', function() {
-    functionItems.forEach(i => i.classList.remove('active'));
-    this.classList.add('active');
-    laadFunctie(this.dataset.function);
-  });
-});
-
-// Zet eerste functie als actief
-functionItems[0].classList.add('active');
+// Initialiseer
+renderFuncties();
+document.querySelector('.function-item').classList.add('active');
 laadFunctie(1);
 
-// bookmark blijft werken
+// Popup functionaliteit
+addFunctionBtn.addEventListener('click', () => {
+  popupOverlay.style.display = 'flex';
+});
+
+cancelBtn.addEventListener('click', () => {
+  popupOverlay.style.display = 'none';
+  newFunctionForm.reset();
+});
+
+popupOverlay.addEventListener('click', (e) => {
+  if (e.target === popupOverlay) {
+    popupOverlay.style.display = 'none';
+    newFunctionForm.reset();
+  }
+});
+
+newFunctionForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  
+  // Haal de hoogste ID op en voeg 1 toe
+  const newId = Math.max(...Object.keys(functies).map(Number)) + 1;
+  
+  // Maak nieuwe functie aan
+  functies[newId] = {
+    titel: document.getElementById('functieTitel').value,
+    beschrijving: document.getElementById('functieBeschrijving').value,
+    benodigd: document.getElementById('functieBenodigdheden').value,
+    opleiding: document.getElementById('functieOpleiding').value
+  };
+  
+  // Herlaad de lijst
+  renderFuncties();
+  
+  // Sluit popup en reset formulier
+  popupOverlay.style.display = 'none';
+  newFunctionForm.reset();
+  
+  // Toon de nieuwe functie
+  const newItem = document.querySelector(`[data-function="${newId}"]`);
+  if (newItem) {
+    newItem.click();
+  }
+  
+  alert('Functie succesvol toegevoegd!');
+});
+
+// Bookmark functionaliteit
 const bookmarkIcon = document.querySelector('.bookmark-icon');
 let isBookmarked = false;
 bookmarkIcon.addEventListener('click', function () {
