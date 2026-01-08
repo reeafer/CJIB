@@ -14,6 +14,8 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
+            background: white;
+            transition: background 0.3s ease;
         }
 
         /* Header */
@@ -25,6 +27,7 @@
             justify-content: center;
             gap: 15px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: background 0.3s ease;
         }
 
         .logo {
@@ -47,12 +50,14 @@
             color: #1a1a1a;
             font-weight: 600;
             margin-bottom: 2px;
+            transition: color 0.3s ease;
         }
 
         .header-text p {
             font-size: 13px;
             color: #666;
             font-style: italic;
+            transition: color 0.3s ease;
         }
 
         /* Navigation */
@@ -62,6 +67,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 0;
+            transition: background 0.3s ease;
         }
 
         .nav-left {
@@ -76,7 +82,7 @@
             display: inline-block;
             font-size: 14px;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: background 0.2s, color 0.3s ease;
         }
 
         .nav-item:hover {
@@ -108,6 +114,7 @@
             gap: 8px;
             cursor: pointer;
             font-size: 14px;
+            transition: color 0.3s ease;
         }
 
         .user-icon {
@@ -120,6 +127,7 @@
             justify-content: center;
             color: white;
             font-size: 14px;
+            transition: background 0.3s ease;
         }
 
         /* Main Layout */
@@ -251,6 +259,7 @@
             padding: 30px 25px;
             display: flex;
             flex-direction: column;
+            transition: background 0.3s ease;
         }
 
         .profile-section {
@@ -307,6 +316,7 @@
             border-radius: 8px;
             line-height: 1.6;
             font-size: 14px;
+            transition: background 0.3s ease;
         }
 
         .info-box::after {
@@ -323,12 +333,15 @@
             flex: 1;
             position: relative;
             overflow: hidden;
+            background: #f5f5f5;
+            transition: background 0.3s ease;
         }
 
         .center-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: opacity 0.3s ease;
         }
 
         /* Right Sidebar */
@@ -338,6 +351,7 @@
             padding: 30px 25px;
             display: flex;
             flex-direction: column;
+            transition: background 0.3s ease;
         }
 
         .menu-items {
@@ -380,6 +394,7 @@
             align-items: center;
             justify-content: center;
             position: relative;
+            transition: background 0.3s ease;
         }
 
         .person {
@@ -523,13 +538,14 @@
             border-radius: 4px;
         }
 
-        /* DARK MODE */
+        /* ===== DARK MODE VOOR HELE PAGINA ===== */
         body.dark {
-            background: #1e1e1e;
+            background: #0a0a0a;
         }
         
         body.dark .header {
-            background: #2d2d2d;
+            background: #1a1a1a;
+            box-shadow: 0 2px 8px rgba(255,255,255,0.05);
         }
         
         body.dark .header-text h1 {
@@ -538,6 +554,56 @@
         
         body.dark .header-text p {
             color: #b0b0b0;
+        }
+
+        body.dark .navbar {
+            background: #2d2d2d;
+        }
+
+        body.dark .nav-item,
+        body.dark .nav-right-item {
+            color: #e0e0e0;
+        }
+
+        body.dark .nav-item:hover {
+            background: rgba(255,255,255,0.05);
+        }
+
+        body.dark .user-icon {
+            background: #e0e0e0;
+            color: #1a1a1a;
+        }
+
+        body.dark .left-sidebar {
+            background: linear-gradient(180deg, #1a0f24 0%, #120a1a 40%, #0a0510 100%);
+        }
+
+        body.dark .right-sidebar {
+            background: linear-gradient(180deg, #1a0f24 0%, #120a1a 100%);
+        }
+
+        body.dark .menu-button {
+            background: #2d1f3a;
+        }
+
+        body.dark .menu-button:hover {
+            background: #3d2f4a;
+        }
+
+        body.dark .info-box {
+            background: rgba(40, 30, 55, 0.6);
+        }
+
+        body.dark .center-image {
+            background: #1a1a1a;
+        }
+
+        body.dark .center-image img {
+            opacity: 0.7;
+        }
+
+        body.dark .illustration {
+            background: linear-gradient(135deg, #0f1a24 0%, #1a0f24 100%);
         }
     </style>
 </head>
