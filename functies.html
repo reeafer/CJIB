@@ -339,47 +339,8 @@
                 <span>zoek filters</span>
                 <button>↓</button>
             </div>
-            <div class="function-list">
-                <div class="function-item active" data-function="1">
-                    <span>functie 1</span>
-                    <span class="function-arrow">→</span>
-                </div>
-                <div class="function-item" data-function="2">
-                    <span>functie 2</span>
-                    <span class="function-arrow">→</span>
-                </div>
-                <div class="function-item" data-function="3">
-                    <span>functie 3</span>
-                    <span class="function-arrow">→</span>
-                </div>
-                <div class="function-item" data-function="4">
-                    <span>functie 4</span>
-                    <span class="function-arrow">→</span>
-                </div>
-                <div class="function-item" data-function="5">
-                    <span>functie 5</span>
-                    <span class="function-arrow">→</span>
-                </div>
-                <div class="function-item" data-function="6">
-                    <span>functie 6</span>
-                    <span class="function-arrow">→</span>
-                </div>
-                <div class="function-item" data-function="7">
-                    <span>functie 7</span>
-                    <span class="function-arrow">→</span>
-                </div>
-                <div class="function-item" data-function="8">
-                    <span>functie 8</span>
-                    <span class="function-arrow">→</span>
-                </div>
-                <div class="function-item" data-function="9">
-                    <span>functie 9</span>
-                    <span class="function-arrow">→</span>
-                </div>
-                <div class="function-item" data-function="10">
-                    <span>functie 10</span>
-                    <span class="function-arrow">→</span>
-                </div>
+            <div class="function-list" id="functionList">
+                <!-- Functies worden hier dynamisch geladen -->
             </div>
         </div>
         <!-- Content Area -->
@@ -395,15 +356,15 @@
                 </div>
                 <div class="content-section">
                     <h3>Beschrijving</h3>
-                    <p>Als medewerker administratie ben je verantwoordelijk voor het verwerken en controleren van financiële gegevens. Je zorgt voor een correcte administratie en draagt bij aan het incassoproces van het CJIB.</p>
+                    <p></p>
                 </div>
                 <div class="content-section">
                     <h3>Benodigdheden</h3>
-                    <p>Je hebt affiniteit met cijfers, werkt nauwkeurig en bent goed in het werken met verschillende computersystemen. Ervaring met administratieve werkzaamheden is een pré.</p>
+                    <p></p>
                 </div>
                 <div class="content-footer">
                     <span>Opleiding</span>
-                    <span class="mbo-badge">MBO</span>
+                    <span class="mbo-badge"></span>
                 </div>
             </div>
         </div>
@@ -473,6 +434,18 @@ const functies = {
   }
 };
 
+// Genereer de functie items dynamisch
+const functionList = document.getElementById('functionList');
+Object.keys(functies).forEach(id => {
+  const div = document.createElement('div');
+  div.className = 'function-item';
+  div.dataset.function = id;
+  div.innerHTML = `
+    <span>${functies[id].titel}</span>
+    <span class="function-arrow">→</span>
+  `;
+  functionList.appendChild(div);
+});
 
 const functionItems = document.querySelectorAll('.function-item');
 const titel = document.querySelector('.content-header h2');
@@ -495,7 +468,8 @@ functionItems.forEach(item => {
   });
 });
 
-// standaard functie 1
+// Zet eerste functie als actief
+functionItems[0].classList.add('active');
 laadFunctie(1);
 
 // bookmark blijft werken
