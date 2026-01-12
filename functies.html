@@ -320,7 +320,6 @@
                 <span>zoek filters</span>
             </div>
             <button class="add-function-btn" id="addBtn">➕ Nieuwe functie toevoegen</button>
-            <button class="reset-btn" id="resetBtn">🔄 Reset naar originele functies</button>
             <div class="function-list" id="functionList"></div>
         </div>
 
@@ -468,10 +467,6 @@
         // Popup
         document.getElementById('addBtn').onclick = function() {
             document.getElementById('popup').classList.add('active');
-        };
-
-        document.getElementById('resetBtn').onclick = function() {
-            resetFuncties();
         };
 
         document.getElementById('cancelBtn').onclick = function() {
