@@ -108,6 +108,20 @@
         .add-function-btn:hover {
             background: #6d3a8a;
         }
+        .reset-btn {
+            margin: 0 20px 15px 20px;
+            padding: 10px 20px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .reset-btn:hover {
+            background: #c0392b;
+        }
         .function-list {
             flex: 1;
             overflow-y: auto;
@@ -290,7 +304,7 @@
     <div class="navbar">
         <div class="nav-left">
             <div class="home-icon">🏠</div>
-            <div class="nav-item">Over ons</div>
+            <div class="nav-item" onclick="window.open('https://www.cjib.nl/over-ons/wat-is-het-cjib', '_blank')" style="cursor: pointer;">Over ons</div>
             <div class="nav-item active">alle functies binnen cjib</div>
             <div class="nav-item">Rol: gebruiker</div>
         </div>
@@ -306,6 +320,7 @@
                 <span>zoek filters</span>
             </div>
             <button class="add-function-btn" id="addBtn">➕ Nieuwe functie toevoegen</button>
+            <button class="reset-btn" id="resetBtn">🔄 Reset naar originele functies</button>
             <div class="function-list" id="functionList"></div>
         </div>
 
@@ -379,13 +394,22 @@
             10: { titel: "HR Medewerker", beschrijving: "Ondersteunt personeelszaken zoals administratie en begeleiding van medewerkers.", benodigd: "MBO-diploma HR of administratie. Ervaring met personeelsadministratie is een pré.", opleiding: "MBO" }
         };
 
-        // RESET localStorage naar de standaard functies (tijdelijk voor herstel)
-        localStorage.setItem('cjib_functies', JSON.stringify(defaultData));
-        
         let functies = JSON.parse(localStorage.getItem('cjib_functies')) || {...defaultData};
 
         function save() {
             localStorage.setItem('cjib_functies', JSON.stringify(functies));
+        }
+
+        function resetFuncties() {
+            if (confirm('Weet je zeker dat je alle functies wilt resetten naar de originele 10? Alle toegevoegde functies worden verwijderd!')) {
+                localStorage.setItem('cjib_functies', JSON.stringify(defaultData));
+                functies = {...defaultData};
+                render();
+                if (Object.keys(functies).length > 0) {
+                    document.querySelector('.function-item').click();
+                }
+                alert('Functies zijn gereset naar de originele 10!');
+            }
         }
 
         function render() {
@@ -444,6 +468,10 @@
         // Popup
         document.getElementById('addBtn').onclick = function() {
             document.getElementById('popup').classList.add('active');
+        };
+
+        document.getElementById('resetBtn').onclick = function() {
+            resetFuncties();
         };
 
         document.getElementById('cancelBtn').onclick = function() {
