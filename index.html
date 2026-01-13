@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="nl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,7 +30,7 @@
             align-items: center;
             justify-content: center;
             gap: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             transition: background 0.3s ease;
         }
 
@@ -83,7 +84,7 @@
         }
 
         .nav-item:hover {
-            background: rgba(0,0,0,0.05);
+            background: rgba(0, 0, 0, 0.05);
         }
 
         .nav-item a {
@@ -158,7 +159,7 @@
         .avatar {
             width: 64px;
             height: 64px;
-            background: rgba(255,255,255,0.25);
+            background: rgba(255, 255, 255, 0.25);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -358,12 +359,12 @@
             right: -5px;
             transform: rotate(45deg);
         }
-        
+
         /* Footer */
         .footer {
             background: white;
             padding: 25px 40px;
-            box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
             transition: background 0.3s ease;
         }
 
@@ -438,12 +439,12 @@
             font-style: italic;
             transition: color 0.3s ease;
         }
-        
+
         /* INSTELLINGEN POPUP */
         .settings-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0, 0, 0, 0.6);
             display: none;
             justify-content: center;
             align-items: center;
@@ -499,16 +500,16 @@
         body.dark {
             background: #0a0a0a;
         }
-        
+
         body.dark .header {
             background: #1a1a1a;
-            box-shadow: 0 2px 8px rgba(255,255,255,0.05);
+            box-shadow: 0 2px 8px rgba(255, 255, 255, 0.05);
         }
-        
+
         body.dark .header-text h1 {
             color: #e0e0e0;
         }
-        
+
         body.dark .header-text p {
             color: #b0b0b0;
         }
@@ -523,7 +524,7 @@
         }
 
         body.dark .nav-item:hover {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255, 255, 255, 0.05);
         }
 
         body.dark .user-icon {
@@ -565,7 +566,7 @@
 
         body.dark .footer {
             background: #1a1a1a;
-            box-shadow: 0 -2px 8px rgba(255,255,255,0.05);
+            box-shadow: 0 -2px 8px rgba(255, 255, 255, 0.05);
         }
 
         body.dark .footer-section h3,
@@ -584,6 +585,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- INSTELLINGEN POPUP -->
     <div class="settings-overlay" id="settingsOverlay">
@@ -609,12 +611,12 @@
     <!-- Header -->
     <div class="header">
         <div class="logo">
-            <img src="Logo_rijksoverheid.svg.png" alt="Rijksoverheid Logo" style="width: 100%; height: 100%; object-fit: contain;">
+            <img src="Logo_rijksoverheid.svg.png" alt="Rijksoverheid Logo"
+                style="width: 100%; height: 100%; object-fit: contain;">
         </div>
-        <div class="header-text"
-            <h1> Rijksoverheid</h1>
+        <div class="header-text" <h1> Rijksoverheid</h1>
 
-           
+
 
             <p>Ministerie van Justitie en Veiligheid</p>
         </div>
@@ -661,24 +663,28 @@
                 </div>
             </div>
             <div class="info-box">
-                Op deze website vind u alles over de functies binnen het Centraal justitieel incassobureau en hoe u hier in kan door groeien.
+                Op deze website vind u alles over de functies binnen het Centraal justitieel incassobureau en hoe u hier
+                in kan door groeien.
             </div>
         </div>
 
         <!-- Center Image -->
         <div class="center-image">
-            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?uto=format&fit=crop&w=1400&q=80" alt="Team collaboration">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?uto=format&fit=crop&w=1400&q=80"
+                alt="Team collaboration">
         </div>
 
         <!-- Right Sidebar -->
         <div class="right-sidebar">
             <div class="menu-items">
                 <button class="menu-button">jouw vervolg stap</button>
-                <button class="menu-button" onclick="window.location.href='routeplanner.html'" style="cursor: pointer;">route planner</button>
+                <button class="menu-button" onclick="window.location.href='routeplanner.html'"
+                    style="cursor: pointer;">route planner</button>
                 <button class="menu-button">opgeslagen functies</button>
-                <button class="menu-button" onclick="window.open('https://www.cjib.nl/over-ons/wat-is-het-cjib', '_blank')"> Over ons</button>
+                <button class="menu-button"
+                    onclick="window.open('https://www.cjib.nl/over-ons/wat-is-het-cjib', '_blank')"> Over ons</button>
             </div>
-            
+
             <div class="illustration">
                 <div class="person person1">
                     <div class="person-head"></div>
@@ -748,7 +754,7 @@
         function loadSettings() {
             const savedEmail = localStorage.getItem('user_email');
             const savedTel = localStorage.getItem('user_tel');
-            
+
             if (savedEmail) {
                 displayEmail.textContent = savedEmail;
             }
@@ -785,7 +791,7 @@
                 localStorage.setItem('user_tel', telInput.value.trim());
                 displayTel.textContent = telInput.value.trim();
             }
-            
+
             overlay.style.display = 'none';
             alert('Instellingen opgeslagen!');
         };
@@ -801,4 +807,5 @@
         };
     </script>
 </body>
+
 </html>
