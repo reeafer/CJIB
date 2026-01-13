@@ -627,17 +627,18 @@
         <div class="nav-left">
             <div class="home-icon">🏠</div>
             <div class="nav-item"><a href="functies.html">Alle functies binnen Rijksoverheid</a></div>
-            <div class="nav-item">Rol: gebruiker</div>
+            <div class="nav-item" id="userRoleDisplay">Rol: Gast</div>
         </div>
         <div class="nav-right">
             <div class="nav-right-item" id="openSettings">Instellingen ⚙️</div>
             <div class="nav-right-item">NL</div>
-            <div class="nav-right-item" onclick="window.location.href='login.html'" style="cursor: pointer;">
+            <div class="nav-right-item" id="loginLink" style="cursor: pointer;">
                 Inloggen
                 <div class="user-icon">👤</div>
             </div>
         </div>
     </div>
+    <script src="auth.js"></script>
 
     <!-- Main Container -->
     <div class="main-container">

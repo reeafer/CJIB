@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Over Ons - Centraal Justitieel Incassobureau</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background: #f5f5f5;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            padding: 18px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .logo svg {
+            width: 32px;
+            height: 32px;
+            fill: white;
+        }
+
+        .header-text h1 {
+            font-size: 18px;
+            color: #1a1a1a;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .header-text p {
+            font-size: 13px;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: #c6b8cf;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-item {
+            padding: 12px 22px;
+            color: #1a1a1a;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .nav-item:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-item.active {
+            background: rgba(0, 0, 0, 0.1);
+            font-weight: 600;
+        }
+
+        .nav-item a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .home-icon {
+            font-size: 26px;
+            padding: 10px 22px;
+            cursor: pointer;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            padding-right: 30px;
+        }
+
+        .nav-right-item {
+            color: #1a1a1a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .user-icon {
+            width: 26px;
+            height: 26px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 40px;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #582f71 0%, #4a2660 100%);
+            color: white;
+            padding: 60px 50px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .hero-section h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero-section p {
+            font-size: 18px;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.95;
+        }
+
+        /* Info Sections */
+        .info-section {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .info-section h2 {
+            color: #582f71;
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .info-section p {
+            color: #333;
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .info-section ul {
+            margin-left: 25px;
+            margin-top: 15px;
+        }
+
+        .info-section li {
+            color: #333;
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        /* Feature Cards */
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            color: #582f71;
+            font-size: 20px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: #555;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* Benefits Grid */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .benefit-item {
+            background: linear-gradient(135deg, #f8f5fb 0%, #ffffff 100%);
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #582f71;
+        }
+
+        .benefit-item h4 {
+            color: #582f71;
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .benefit-item p {
+            color: #555;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #582f71 0%, #6d4185 100%);
+            color: white;
+            padding: 50px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            background: white;
+            color: #582f71;
+            padding: 15px 35px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: transform 0.2s;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 0 20px;
+            }
+
+            .hero-section {
+                padding: 40px 30px;
+            }
+
+            .hero-section h1 {
+                font-size: 32px;
+            }
+
+            .hero-section p {
+                font-size: 16px;
+            }
+
+            .info-section {
+                padding: 30px 25px;
+            }
+
+            .info-section h2 {
+                font-size: 24px;
+            }
+
+            .cta-section {
+                padding: 35px 25px;
+            }
+
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-left,
+            .nav-right {
+                width: 100%;
+                flex-wrap: wrap;
+            }
+
+            .nav-right {
+                padding-left: 22px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">
+            <img src="Logo_rijksoverheid.svg.png" alt="Rijksoverheid Logo"
+                style="width: 100%; height: 100%; object-fit: contain;">
+        </div>
+        <div class="header-text">
+            <h1>Centraal Justitieel Incassobureau</h1>
+            <p>Ministerie van Justitie en Veiligheid</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="navbar">
+        <div class="nav-left">
+            <a href="index.html" style="text-decoration: none; color: inherit;">
+                <div class="home-icon">🏠</div>
+            </a>
+            <div class="nav-item active">Over ons</div>
+            <div class="nav-item"><a href="functies.html">Alle functies binnen CJIB</a></div>
+            <div class="nav-item">Rol: gebruiker</div>
+        </div>
+        <div class="nav-right">
+            <div class="nav-right-item">Instellingen ⚙️</div>
+            <div class="nav-right-item">NL</div>
+            <div class="nav-right-item">
+                Inloggen
+                <div class="user-icon">👤</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <h1>Jouw Carrière bij het CJIB</h1>
+            <p>Ontdek alle mogelijkheden om te groeien en door te stromen binnen het Centraal Justitieel Incassobureau
+            </p>
+        </div>
+
+        <!-- What is this platform -->
+        <div class="info-section">
+            <h2>Wat is deze website?</h2>
+            <p>De CJIB Loopbaanpaden website is een digitaal platform dat speciaal is ontwikkeld om medewerkers van het
+                Centraal Justitieel Incassobureau inzicht te geven in hun carrièremogelijkheden. Of je nu net begint bij
+                het CJIB of al jaren werkzaam bent, deze website helpt je bij het plannen en ontwikkelen van je loopbaan
+                binnen onze organisatie.</p>
+
+            <p>We bieden een overzichtelijk en gebruiksvriendelijk systeem waarin je alle functies binnen het CJIB kunt
+                verkennen, begrijpen welke stappen je kunt zetten in je carrière, en ontdekken welke competenties je
+                nodig hebt om je doelen te bereiken.</p>
+        </div>
+
+        <!-- Features -->
+        <div class="info-section">
+            <h2>Wat kun je hier vinden?</h2>
+            <div class="feature-cards">
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>Alle CJIB Functies</h3>
+                    <p>Bekijk een compleet overzicht van alle beschikbare functies binnen het CJIB met gedetailleerde
+                        functieomschrijvingen en vereiste competenties.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🗺️</div>
+                    <h3>Loopbaanpaden</h3>
+                    <p>Ontdek logische doorgroeimogelijkheden vanuit jouw huidige functie. Zie welke stappen je kunt
+                        zetten, zowel horizontaal als verticaal.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Persoonlijke Route Planner</h3>
+                    <p>Plan je eigen loopbaan met onze route planner. Stel doelen en krijg inzicht in welke stappen je
+                        moet nemen om daar te komen.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💼</div>
+                    <h3>Competentie Overzicht</h3>
+                    <p>Bekijk welke vaardigheden en competenties nodig zijn voor verschillende functies en werk aan je
+                        persoonlijke ontwikkeling.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⭐</div>
+                    <h3>Opgeslagen Functies</h3>
+                    <p>Bewaar interessante functies in je persoonlijke lijst en houd zo je carrièreambities bij.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Jouw Vervolg Stap</h3>
+                    <p>Krijg gepersonaliseerde aanbevelingen voor je volgende carrièrestap op basis van je huidige
+                        functie en interesses.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Benefits for employees -->
+        <div class="info-section">
+            <h2>Waarom deze website gebruiken?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <h4>🚀 Groei in je Carrière</h4>
+                    <p>Krijg helder inzicht in je doorgroeimogelijkheden en neem de regie over je loopbaan.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>🔍 Ontdek Nieuwe Mogelijkheden</h4>
+                    <p>Leer functies kennen die je misschien nog niet kende maar wel perfect bij je passen.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>📚 Ontwikkel Je Vaardigheden</h4>
+                    <p>Weet precies welke competenties je moet ontwikkelen voor je droombaan.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>🎓 Plan Je Opleiding</h4>
+                    <p>Zie welke opleidingen en trainingen je nodig hebt voor verschillende functies.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- For managers -->
+        <div class="info-section">
+            <h2>Voor Leidinggevenden</h2>
+            <p>Deze website is ook een waardevol instrument voor managers en teamleiders. Het helpt bij:</p>
+            <ul>
+                <li><strong>Strategische personeelsplanning:</strong> Krijg inzicht in de mogelijke doorstroom binnen je
+                    team</li>
+                <li><strong>Talentontwikkeling:</strong> Ondersteun medewerkers bij hun loopbaanontwikkeling met
+                    concrete informatie</li>
+                <li><strong>Behoud van medewerkers:</strong> Toon groeimogelijkheden en vergroot de betrokkenheid</li>
+                <li><strong>Kennisdeling:</strong> Faciliteer gesprekken over carrièreambities met actuele
+                    functie-informatie</li>
+            </ul>
+        </div>
+
+        <!-- How it works -->
+        <div class="info-section">
+            <h2>Hoe werkt het?</h2>
+            <p>Gebruik maken van de CJIB Loopbaanpaden website is eenvoudig:</p>
+            <ul>
+                <li><strong>Stap 1:</strong> Log in met je CJIB account</li>
+                <li><strong>Stap 2:</strong> Bekijk alle beschikbare functies binnen het CJIB</li>
+                <li><strong>Stap 3:</strong> Ontdek welke loopbaanpaden er zijn vanuit je huidige of gewenste functie
+                </li>
+                <li><strong>Stap 4:</strong> Gebruik de route planner om je persoonlijke carrièrepad uit te stippelen
+                </li>
+                <li><strong>Stap 5:</strong> Bewaar interessante functies en bespreek je plannen met je leidinggevende
+                </li>
+            </ul>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2>Klaar om je carrière te ontdekken?</h2>
+            <p>Begin vandaag nog met het verkennen van jouw mogelijkheden binnen het CJIB</p>
+            <div class="cta-buttons">
+                <button class="cta-button">Bekijk Alle Functies</button>
+                <button class="cta-button">Start Route Planner</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

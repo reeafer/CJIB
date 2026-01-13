@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Centraal Justitieel Incassobureau</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #c6b8cf 0%, #582f71 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+        }
+
+        h1 {
+            color: #582f71;
+            font-size: 28px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 14px;
+            text-align: center;
+            font-style: italic;
+            margin-bottom: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #582f71;
+        }
+
+        .error-message {
+            color: #d32f2f;
+            font-size: 14px;
+            margin-top: 15px;
+            text-align: center;
+            display: none;
+            padding: 10px;
+            background: #ffebee;
+            border-radius: 4px;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            background: #582f71;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #6d4185;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .info-text {
+            text-align: center;
+            margin-top: 25px;
+            color: #666;
+            font-size: 13px;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 6px;
+        }
+
+        .info-text strong {
+            color: #582f71;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            color: #582f71;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 30px 25px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo-section">
+            <img src="Logo_rijksoverheid.svg.png" alt="Rijksoverheid Logo" class="logo" style="object-fit: contain;">
+            <h1>CJIB Login</h1>
+            <p class="subtitle">Centraal Justitieel Incassobureau</p>
+        </div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Gebruikersnaam</label>
+                <input type="text" id="username" placeholder="Voer uw gebruikersnaam in" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Wachtwoord</label>
+                <input type="password" id="password" placeholder="Voer uw wachtwoord in" required>
+            </div>
+
+            <div class="error-message" id="errorMessage"></div>
+
+            <button type="submit">Inloggen</button>
+        </form>
+
+        <div class="info-text">
+            <strong>Test accounts:</strong>
+            Admin: admin / admin<br>
+            Gebruiker: user / 1234
+        </div>
+
+        <div class="back-link">
+            <a href="index.html">← Terug naar homepage</a>
+        </div>
+    </div>
+
+    <script>
+        let pogingen = 0;
+        const MAX_POGINGEN = 3;
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const errorMsg = document.getElementById('errorMessage');
+
+            // Validatie
+            if (!username || !password) {
+                errorMsg.textContent = 'Vul alle velden in.';
+                errorMsg.classList.add('show');
+                return;
+            }
+
+            // Check credentials (simpel, zonder backend)
+            const isAdmin = username === 'admin' && password === 'admin';
+            const isUser = username === 'user' && password === '1234';
+
+            if (isAdmin || isUser) {
+                // Login succesvol
+                alert('✅ Login succesvol! Welkom ' + username);
+                
+                // Sla gebruiker op in sessionStorage
+                sessionStorage.setItem('loggedInUser', username);
+                sessionStorage.setItem('userRole', isAdmin ? 'Administrator' : 'Gebruiker');
+                
+                // Reset pogingen
+                pogingen = 0;
+                
+                // Redirect naar homepage
+                window.location.href = 'index.html';
+            } else {
+                // Login mislukt
+                pogingen++;
+                errorMsg.textContent = '❌ Onjuiste gebruikersnaam of wachtwoord. Poging ' + pogingen + ' van ' + MAX_POGINGEN + '.';
+                errorMsg.classList.add('show');
+                
+                // Clear password field
+                document.getElementById('password').value = '';
+
+                // Te veel pogingen
+                if (pogingen >= MAX_POGINGEN) {
+                    alert('⛔ Te veel mislukte inlogpogingen. U wordt teruggestuurd naar de homepage.');
+                    window.location.href = 'index.html';
+                }
+            }
+        });
+
+        // Reset error message when typing
+        document.getElementById('username').addEventListener('input', function() {
+            document.getElementById('errorMessage').classList.remove('show');
+        });
+
+        document.getElementById('password').addEventListener('input', function() {
+            document.getElementById('errorMessage').classList.remove('show');
+        });
+    </script>
+</body>
+</html>
