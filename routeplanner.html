@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Routeplanner - CJIB</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; }
+        
+        /* Header & Navbar - simpel */
+        .header { background: white; padding: 20px 50px; display: flex; gap: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .logo { width: 80px; height: 80px; }
+        .header-text h1 { font-size: 19px; }
+        .header-text p { font-size: 13px; color: #666; font-style: italic; }
+        
+        .navbar { background: #c6b8cf; display: flex; justify-content: space-between; padding: 0; }
+        .nav-left, .nav-right { display: flex; align-items: center; gap: 20px; }
+        .nav-item { padding: 12px 24px; cursor: pointer; }
+        .home-icon { font-size: 28px; padding: 8px 24px; cursor: pointer; }
+        .nav-right { padding-right: 30px; }
+        
+        /* Main layout */
+        .main { display: flex; height: calc(100vh - 130px); }
+        
+        /* Sidebar */
+        .sidebar { width: 360px; background: white; border-right: 1px solid #ddd; }
+        .sidebar-header { padding: 20px; background: #d4c5dc; font-size: 18px; font-weight: 600; }
+        .function-item { padding: 18px 20px; background: #582f71; color: white; display: flex; justify-content: space-between; border-bottom: 1px solid #ddd; cursor: pointer; }
+        .function-item:hover { background: #6d3a8a; }
+        
+        /* Content */
+        .content { flex: 1; background: url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600') center/cover; position: relative; display: flex; justify-content: center; align-items: center; }
+        .content::before { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,0.7); }
+        
+        /* Flowchart */
+        .flowchart { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 15px; }
+        .box { background: #d4c5dc; padding: 12px 30px; border-radius: 6px; font-size: 16px; font-weight: 700; }
+        .arrow { width: 3px; height: 40px; background: #333; position: relative; }
+        .arrow::after { content: ''; position: absolute; bottom: -8px; left: -5px; border: 8px solid transparent; border-top: 12px solid #333; }
+        .split { display: flex; gap: 40px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="Logo_rijksoverheid.svg.png" class="logo">
+        <div class="header-text">
+            <h1>Centraal Justitieel Incassobureau</h1>
+            <p>Ministerie van Justitie en Veiligheid</p>
+        </div>
+    </div>
+
+    <div class="navbar">
+        <div class="nav-left">
+            <a href="index.html" style="text-decoration: none; color: inherit;">
+                <div class="home-icon">🏠</div>
+            </a>
+            <div class="nav-item" onclick="window.open('https://www.cjib.nl/over-ons/wat-is-het-cjib', '_blank')" style="cursor: pointer;">over ons</div>
+            <div class="nav-item" onclick="window.location.href='functies.html'" style="cursor: pointer;">alle functies</div>
+            <div class="nav-item">Rol: gebruiker</div>
+        </div>
+        <div class="nav-right">
+            <div class="nav-item" id="openSettings">instellingen ⚙️</div>
+            <div class="nav-item">🇳🇱 NL</div>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="sidebar">
+            <div class="sidebar-header">OPGESLAGEN FUNCTIES</div>
+            <div class="function-item"><span>FUNCTIE 1</span><span>→</span></div>
+            <div class="function-item"><span>FUNCTIE 2</span><span>→</span></div>
+            <div class="function-item"><span>FUNCTIE 3</span><span>→</span></div>
+            <div class="function-item"><span>FUNCTIE 4</span><span>→</span></div>
+            <div class="function-item"><span>FUNCTIE 5</span><span>→</span></div>
+            <div class="function-item"><span>FUNCTIE 6</span><span>→</span></div>
+            <div class="function-item"><span>FUNCTIE 7</span><span>→</span></div>
+            <div class="function-item"><span>FUNCTIE 8</span><span>→</span></div>
+            <div class="function-item"><span>FUNCTIE 9</span><span>→</span></div>
+        </div>
+
+        <div class="content">
+            <div class="flowchart">
+                <div class="box" style="font-size: 20px; padding: 15px 40px;">FUNCTIE 1</div>
+                <div class="box">START</div>
+                <div class="arrow"></div>
+                <div class="box">OPLEIDING</div>
+                <div class="arrow"></div>
+                <div class="split">
+                    <div class="box">FUNCTIE</div>
+                    <div class="box">CURSUS</div>
+                </div>
+                <div class="arrow"></div>
+                <div class="box">EIND DOEL</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
