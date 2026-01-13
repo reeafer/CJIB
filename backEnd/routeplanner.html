@@ -1,69 +1,273 @@
 <!DOCTYPE html>
 <html lang="nl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Routeplanner - Rijksoverheid</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', sans-serif; }
-        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+        }
+
         /* Header & Navbar - simpel */
-        .header { background: white; padding: 20px 50px; display: flex; gap: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .logo { width: 80px; height: 80px; }
-        .header-text h1 { font-size: 19px; }
-        .header-text p { font-size: 13px; color: #666; font-style: italic; }
-        
-        .navbar { background: #c6b8cf; display: flex; justify-content: space-between; padding: 0; }
-        .nav-left, .nav-right { display: flex; align-items: center; gap: 20px; }
-        .nav-item { padding: 12px 24px; cursor: pointer; }
-        .home-icon { font-size: 28px; padding: 8px 24px; cursor: pointer; }
-        .nav-right { padding-right: 30px; }
-        
+        .header {
+            background: white;
+            padding: 20px 50px;
+            display: flex;
+            gap: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+        }
+
+        .header-text h1 {
+            font-size: 19px;
+        }
+
+        .header-text p {
+            font-size: 13px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .navbar {
+            background: #c6b8cf;
+            display: flex;
+            justify-content: space-between;
+            padding: 0;
+        }
+
+        .nav-left,
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-item {
+            padding: 12px 24px;
+            cursor: pointer;
+        }
+
+        .home-icon {
+            font-size: 28px;
+            padding: 8px 24px;
+            cursor: pointer;
+        }
+
+        .nav-right {
+            padding-right: 30px;
+        }
+
         /* Main layout */
-        .main { display: flex; height: calc(100vh - 130px); }
-        
+        .main {
+            display: flex;
+            height: calc(100vh - 130px);
+        }
+
         /* Sidebar */
-        .sidebar { width: 360px; background: white; border-right: 1px solid #ddd; }
-        .sidebar-header { padding: 20px; background: #d4c5dc; font-size: 18px; font-weight: 600; }
-        .function-item { padding: 18px 20px; background: #582f71; color: white; display: flex; justify-content: space-between; border-bottom: 1px solid #ddd; cursor: pointer; }
-        .function-item:hover { background: #6d3a8a; }
-        
+        .sidebar {
+            width: 360px;
+            background: white;
+            border-right: 1px solid #ddd;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            background: #d4c5dc;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .function-item {
+            padding: 18px 20px;
+            background: #582f71;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        .function-item:hover {
+            background: #6d3a8a;
+        }
+
         /* Content */
-        .content { flex: 1; background: url('achtergrond.png') center/cover; position: relative; display: flex; justify-content: center; align-items: center; }
-        .content::before { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,0.7); }
-        
+        .content {
+            flex: 1;
+            background: url('achtergrond.png') center/cover;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.7);
+        }
+
         /* Flowchart */
-        .flowchart { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 15px; }
-        .box { background: #d4c5dc; padding: 12px 30px; border-radius: 6px; font-size: 16px; font-weight: 700; }
-        .arrow { width: 3px; height: 40px; background: #333; position: relative; }
-        .arrow::after { content: ''; position: absolute; bottom: -8px; left: -5px; border: 8px solid transparent; border-top: 12px solid #333; }
-        .split { display: flex; gap: 40px; }
-        
+        .flowchart {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .box {
+            background: #d4c5dc;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .arrow {
+            width: 3px;
+            height: 40px;
+            background: #333;
+            position: relative;
+        }
+
+        .arrow::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: -5px;
+            border: 8px solid transparent;
+            border-top: 12px solid #333;
+        }
+
+        .split {
+            display: flex;
+            gap: 40px;
+        }
+
         /* Instellingen Popup */
-        .settings-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 9999; }
-        .settings-popup { width: 720px; max-width: 90%; background: #5b2d6f; color: white; padding: 50px; border-radius: 10px; }
-        .settings-popup h1 { font-size: 42px; margin-bottom: 30px; }
-        .settings-popup label { display: block; margin-top: 20px; margin-bottom: 6px; }
-        .settings-popup input[type="email"], .settings-popup input[type="text"] { width: 100%; padding: 12px; border-radius: 4px; border: none; }
-        .darkmode-row { margin-top: 30px; display: flex; justify-content: space-between; align-items: center; }
-        .settings-popup button { margin-top: 20px; margin-right: 10px; padding: 10px 20px; background: #d1c4d9; border: none; cursor: pointer; border-radius: 4px; }
-        
+        .settings-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .settings-popup {
+            width: 720px;
+            max-width: 90%;
+            background: #5b2d6f;
+            color: white;
+            padding: 50px;
+            border-radius: 10px;
+        }
+
+        .settings-popup h1 {
+            font-size: 42px;
+            margin-bottom: 30px;
+        }
+
+        .settings-popup label {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 6px;
+        }
+
+        .settings-popup input[type="email"],
+        .settings-popup input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border-radius: 4px;
+            border: none;
+        }
+
+        .darkmode-row {
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .settings-popup button {
+            margin-top: 20px;
+            margin-right: 10px;
+            padding: 10px 20px;
+            background: #d1c4d9;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
         /* Dark Mode */
-        body.dark { background: #0a0a0a; }
-        body.dark .header { background: #1a1a1a; }
-        body.dark .header-text h1 { color: #e0e0e0; }
-        body.dark .header-text p { color: #b0b0b0; }
-        body.dark .navbar { background: #2d2d2d; }
-        body.dark .nav-item { color: #e0e0e0; }
-        body.dark .sidebar { background: #1a1a1a; }
-        body.dark .sidebar-header { background: #2d2d2d; color: #e0e0e0; }
-        body.dark .function-item { background: #2d1f3a; }
-        body.dark .function-item:hover { background: #3d2f4a; }
-        body.dark .content::before { background: rgba(0,0,0,0.5); }
-        body.dark .box { background: #3d2f4a; color: #e0e0e0; }
+        body.dark {
+            background: #0a0a0a;
+        }
+
+        body.dark .header {
+            background: #1a1a1a;
+        }
+
+        body.dark .header-text h1 {
+            color: #e0e0e0;
+        }
+
+        body.dark .header-text p {
+            color: #b0b0b0;
+        }
+
+        body.dark .navbar {
+            background: #2d2d2d;
+        }
+
+        body.dark .nav-item {
+            color: #e0e0e0;
+        }
+
+        body.dark .sidebar {
+            background: #1a1a1a;
+        }
+
+        body.dark .sidebar-header {
+            background: #2d2d2d;
+            color: #e0e0e0;
+        }
+
+        body.dark .function-item {
+            background: #2d1f3a;
+        }
+
+        body.dark .function-item:hover {
+            background: #3d2f4a;
+        }
+
+        body.dark .content::before {
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        body.dark .box {
+            background: #3d2f4a;
+            color: #e0e0e0;
+        }
     </style>
 </head>
+
 <body>
     <!-- INSTELLINGEN POPUP -->
     <div class="settings-overlay" id="settingsOverlay">
@@ -95,33 +299,32 @@
             <a href="index.html" style="text-decoration: none; color: inherit;">
                 <div class="home-icon">🏠</div>
             </a>
-            <div class="nav-item" onclick="window.open('https://www.cjib.nl/over-ons/wat-is-het-cjib', '_blank')" style="cursor: pointer;">over ons</div>
-            <div class="nav-item" onclick="window.location.href='functies.html'" style="cursor: pointer;">alle functies</div>
-            <div class="nav-item">Rol: gebruiker</div>
+            <div class="nav-item" onclick="window.open('https://www.cjib.nl/over-ons/wat-is-het-cjib', '_blank')"
+                style="cursor: pointer;">over ons</div>
+            <div class="nav-item" onclick="window.location.href='functies.html'" style="cursor: pointer;">alle functies
+            </div>
+            <div class="nav-item" id="userRoleDisplay">Rol: Gast</div>
         </div>
         <div class="nav-right">
             <div class="nav-item" id="openSettings">instellingen ⚙️</div>
             <div class="nav-item">🇳🇱 NL</div>
+            <div class="nav-item" id="loginLink" style="cursor: pointer;">Inloggen</div>
         </div>
     </div>
+    <script src="auth.js"></script>
 
     <div class="main">
         <div class="sidebar">
             <div class="sidebar-header">OPGESLAGEN FUNCTIES</div>
-            <div class="function-item"><span>FUNCTIE 1</span><span>→</span></div>
-            <div class="function-item"><span>FUNCTIE 2</span><span>→</span></div>
-            <div class="function-item"><span>FUNCTIE 3</span><span>→</span></div>
-            <div class="function-item"><span>FUNCTIE 4</span><span>→</span></div>
-            <div class="function-item"><span>FUNCTIE 5</span><span>→</span></div>
-            <div class="function-item"><span>FUNCTIE 6</span><span>→</span></div>
-            <div class="function-item"><span>FUNCTIE 7</span><span>→</span></div>
-            <div class="function-item"><span>FUNCTIE 8</span><span>→</span></div>
-            <div class="function-item"><span>FUNCTIE 9</span><span>→</span></div>
+            <div id="dynamicFunctionList">
+                <!-- Wordt gevuld via JS -->
+            </div>
         </div>
 
         <div class="content">
             <div class="flowchart">
-                <div class="box" style="font-size: 20px; padding: 15px 40px;">FUNCTIE 1</div>
+                <div class="box" id="flowchartTitle" style="font-size: 20px; padding: 15px 40px;">SELECTEER EEN FUNCTIE
+                </div>
                 <div class="box">START</div>
                 <div class="arrow"></div>
                 <div class="box">OPLEIDING</div>
@@ -137,6 +340,33 @@
     </div>
 
     <script>
+        // Load functions from localStorage (same key as functies.html)
+        const savedFuncties = JSON.parse(localStorage.getItem('cjib_functies')) || {};
+        const listContainer = document.getElementById('dynamicFunctionList');
+        const flowTitle = document.getElementById('flowchartTitle');
+
+        if (Object.keys(savedFuncties).length === 0) {
+            listContainer.innerHTML = '<div style="padding:20px; color:#666;">Geen functies gevonden.</div>';
+        } else {
+            Object.keys(savedFuncties).forEach(id => {
+                const f = savedFuncties[id];
+                const div = document.createElement('div');
+                div.className = 'function-item';
+                div.innerHTML = `<span>${f.titel}</span><span>→</span>`;
+                div.onclick = () => {
+                    flowTitle.textContent = f.titel.toUpperCase();
+                    // Highlight active
+                    document.querySelectorAll('.function-item').forEach(el => el.style.background = '');
+                    // Note: inline style override might be needed if CSS uses !important or specific selectors, 
+                    // but usually class toggling is better. For now keeping it simple.
+                    // Let's use a class logic if possible, but the original CSS had hover effects.
+                    // Re-applying base style or class would be better.
+                    // Let's just update the text for now as requested.
+                };
+                listContainer.appendChild(div);
+            });
+        }
+
         const openBtn = document.getElementById('openSettings');
         const closeBtn = document.getElementById('closeSettings');
         const saveBtn = document.getElementById('saveSettings');
@@ -185,4 +415,5 @@
         };
     </script>
 </body>
+
 </html>
