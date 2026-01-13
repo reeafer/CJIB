@@ -10,14 +10,12 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
             background: white;
             transition: background 0.3s ease;
         }
-
         /* Header */
         .header {
             background: white;
@@ -29,7 +27,6 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             transition: background 0.3s ease;
         }
-
         .logo {
             width: 80px;
             height: 80px;
@@ -38,13 +35,11 @@
             justify-content: center;
             flex-shrink: 0;
         }
-
         .logo svg {
             width: 32px;
             height: 32px;
             fill: white;
         }
-
         .header-text h1 {
             font-size: 18px;
             color: #1a1a1a;
@@ -52,29 +47,25 @@
             margin-bottom: 2px;
             transition: color 0.3s ease;
         }
-
         .header-text p {
             font-size: 13px;
             color: #666;
             font-style: italic;
             transition: color 0.3s ease;
         }
-
         /* Navigation */
         .navbar {
-            background: #c6b8cf;
+            background: #a6c8e1;
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0;
             transition: background 0.3s ease;
         }
-
         .nav-left {
             display: flex;
             align-items: center;
         }
-
         .nav-item {
             padding: 12px 22px;
             color: #1a1a1a;
@@ -84,29 +75,24 @@
             cursor: pointer;
             transition: background 0.2s, color 0.3s ease;
         }
-
         .nav-item:hover {
             background: rgba(0,0,0,0.05);
         }
-
         .nav-item a {
             color: inherit;
             text-decoration: none;
         }
-
         .home-icon {
             font-size: 26px;
             padding: 10px 22px;
             cursor: pointer;
         }
-
         .nav-right {
             display: flex;
             align-items: center;
             gap: 30px;
             padding-right: 30px;
         }
-
         .nav-right-item {
             color: #1a1a1a;
             display: flex;
@@ -116,7 +102,6 @@
             font-size: 14px;
             transition: color 0.3s ease;
         }
-
         .user-icon {
             width: 26px;
             height: 26px;
@@ -129,149 +114,122 @@
             font-size: 14px;
             transition: background 0.3s ease;
         }
-
         /* Main Layout */
         .main-container {
             display: flex;
             height: calc(100vh - 112px);
             min-height: 500px;
         }
-
         /* Responsive */
         @media (max-width: 1200px) {
             .main-container {
                 flex-direction: column;
                 height: auto;
             }
-
             .left-sidebar,
             .right-sidebar {
                 width: 100%;
             }
-
             .center-image {
                 height: 400px;
             }
-
             .info-box {
                 margin-top: 30px;
             }
         }
-
         @media (max-width: 768px) {
             .header {
                 padding: 15px 20px;
                 flex-wrap: wrap;
             }
-
             .header-text h1 {
                 font-size: 16px;
             }
-
             .header-text p {
                 font-size: 12px;
             }
-
             .navbar {
                 flex-direction: column;
                 align-items: flex-start;
             }
-
             .nav-left,
             .nav-right {
                 width: 100%;
                 flex-wrap: wrap;
             }
-
             .nav-right {
                 padding-left: 22px;
                 padding-top: 10px;
                 padding-bottom: 10px;
             }
-
             .profile-header {
                 flex-direction: column;
                 align-items: center;
                 text-align: center;
             }
-
             .contact-info {
                 font-size: 12px;
             }
-
             .center-image {
                 height: 300px;
             }
-
             .illustration {
                 height: 200px;
                 padding: 30px 15px;
             }
-
             .person-head {
                 width: 35px !important;
                 height: 35px !important;
             }
-
             .person-body {
                 width: 40px !important;
                 height: 60px !important;
             }
         }
-
         @media (max-width: 480px) {
             .logo {
                 width: 48px;
                 height: 48px;
             }
-
             .logo svg {
                 width: 28px;
                 height: 28px;
             }
-
             .nav-item {
                 padding: 10px 15px;
                 font-size: 13px;
             }
-
             .home-icon {
                 font-size: 22px;
                 padding: 8px 15px;
             }
-
             .menu-button {
                 padding: 14px 18px;
                 font-size: 15px;
             }
-
             .left-sidebar,
             .right-sidebar {
                 padding: 20px;
             }
         }
-
         /* Left Sidebar */
         .left-sidebar {
             width: 280px;
-            background: linear-gradient(180deg, #582f71 0%, #4a2660 40%, #3b1c4d 100%);
+            background: linear-gradient(180deg, #01689b 0%, #015a85 40%, #014c6f 100%);
             color: white;
             padding: 30px 25px;
             display: flex;
             flex-direction: column;
             transition: background 0.3s ease;
         }
-
         .profile-section {
             margin-bottom: 30px;
         }
-
         .profile-header {
             display: flex;
             gap: 15px;
             margin-bottom: 20px;
         }
-
         .avatar {
             width: 64px;
             height: 64px;
@@ -283,42 +241,36 @@
             font-size: 32px;
             flex-shrink: 0;
         }
-
         .profile-info h2 {
             font-size: 18px;
             font-weight: 700;
             margin-bottom: 3px;
         }
-
         .profile-info p {
             font-size: 12px;
             opacity: 0.95;
             letter-spacing: 0.5px;
         }
-
         .contact-info {
             display: flex;
             flex-direction: column;
             gap: 10px;
             font-size: 13px;
         }
-
         .contact-item {
             display: flex;
             align-items: center;
             gap: 8px;
         }
-
         .info-box {
             margin-top: 160px;
-            background: rgba(107, 91, 149, 0.6);
+            background: rgba(1, 104, 155, 0.6);
             padding: 25px;
             border-radius: 8px;
             line-height: 1.6;
             font-size: 14px;
             transition: background 0.3s ease;
         }
-
         .info-box::after {
             content: '';
             display: block;
@@ -327,7 +279,6 @@
             background: white;
             margin-top: 20px;
         }
-
         /* Center Image */
         .center-image {
             flex: 1;
@@ -336,33 +287,29 @@
             background: #f5f5f5;
             transition: background 0.3s ease;
         }
-
         .center-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: opacity 0.3s ease;
         }
-
         /* Right Sidebar */
         .right-sidebar {
             width: 380px;
-            background: linear-gradient(180deg, #582f71 0%, #4a2660 100%);
+            background: linear-gradient(180deg, #01689b 0%, #015a85 100%);
             padding: 30px 25px;
             display: flex;
             flex-direction: column;
             transition: background 0.3s ease;
         }
-
         .menu-items {
             display: flex;
             flex-direction: column;
             gap: 15px;
             margin-bottom: 30px;
         }
-
         .menu-button {
-            background: #8b7ba8;
+            background: #4a97c4;
             color: white;
             padding: 16px 20px;
             border-radius: 8px;
@@ -372,21 +319,18 @@
             border: none;
             text-align: left;
         }
-
         .menu-button:hover {
-            background: #9d8dba;
+            background: #5ba5d0;
         }
-
         .menu-button a {
             color: white;
             text-decoration: none;
             display: block;
         }
-
         /* Illustration */
         .illustration {
             margin-top: auto;
-            background: linear-gradient(135deg, #e6f2ff 0%, #f0e6ff 100%);
+            background: linear-gradient(135deg, #e6f2ff 0%, #cce5ff 100%);
             border-radius: 40px;
             padding: 40px 20px;
             height: 240px;
@@ -396,14 +340,12 @@
             position: relative;
             transition: background 0.3s ease;
         }
-
         .person {
             position: absolute;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-
         .person-head {
             width: 45px;
             height: 45px;
@@ -411,13 +353,11 @@
             background: #f4a261;
             margin-bottom: 5px;
         }
-
         .person-body {
             width: 50px;
             height: 70px;
             border-radius: 25px 25px 20px 20px;
         }
-
         .person-arm {
             position: absolute;
             width: 8px;
@@ -425,57 +365,45 @@
             border-radius: 4px;
             transform-origin: top center;
         }
-
         .person1 {
             left: 15%;
         }
-
         .person1 .person-head {
             background: #f4a261;
         }
-
         .person1 .person-body {
             background: #4a90e2;
         }
-
         .person1 .person-arm {
             background: #ffd166;
             top: 50px;
             left: -5px;
             transform: rotate(-45deg);
         }
-
         .person2 {
             left: 42%;
         }
-
         .person2 .person-head {
             background: #e76f51;
         }
-
         .person2 .person-body {
             background: #ef476f;
         }
-
         .person2 .person-arm {
             background: #06ffa5;
             top: 50px;
             right: -8px;
             transform: rotate(45deg);
         }
-
         .person3 {
             right: 15%;
         }
-
         .person3 .person-head {
             background: #2a9d8f;
         }
-
         .person3 .person-body {
             background: #a78bfa;
         }
-
         .person3 .person-arm {
             background: #4ade80;
             top: 50px;
@@ -493,27 +421,23 @@
             align-items: center;
             z-index: 9999;
         }
-
         .settings-popup {
             width: 720px;
             max-width: 90%;
-            background: #5b2d6f;
+            background: #01689b;
             color: white;
             padding: 50px;
             border-radius: 10px;
         }
-
         .settings-popup h1 {
             font-size: 42px;
             margin-bottom: 30px;
         }
-
         .settings-popup label {
             display: block;
             margin-top: 20px;
             margin-bottom: 6px;
         }
-
         .settings-popup input[type="email"],
         .settings-popup input[type="text"] {
             width: 100%;
@@ -521,23 +445,20 @@
             border-radius: 4px;
             border: none;
         }
-
         .darkmode-row {
             margin-top: 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
         .settings-popup button {
             margin-top: 40px;
             padding: 10px 20px;
-            background: #d1c4d9;
+            background: #a6c8e1;
             border: none;
             cursor: pointer;
             border-radius: 4px;
         }
-
         /* ===== DARK MODE VOOR HELE PAGINA ===== */
         body.dark {
             background: #0a0a0a;
@@ -555,55 +476,43 @@
         body.dark .header-text p {
             color: #b0b0b0;
         }
-
         body.dark .navbar {
             background: #2d2d2d;
         }
-
         body.dark .nav-item,
         body.dark .nav-right-item {
             color: #e0e0e0;
         }
-
         body.dark .nav-item:hover {
             background: rgba(255,255,255,0.05);
         }
-
         body.dark .user-icon {
             background: #e0e0e0;
             color: #1a1a1a;
         }
-
         body.dark .left-sidebar {
-            background: linear-gradient(180deg, #1a0f24 0%, #120a1a 40%, #0a0510 100%);
+            background: linear-gradient(180deg, #001a33 0%, #001426 40%, #000d1a 100%);
         }
-
         body.dark .right-sidebar {
-            background: linear-gradient(180deg, #1a0f24 0%, #120a1a 100%);
+            background: linear-gradient(180deg, #001a33 0%, #001426 100%);
         }
-
         body.dark .menu-button {
-            background: #2d1f3a;
+            background: #002244;
         }
-
         body.dark .menu-button:hover {
-            background: #3d2f4a;
+            background: #003366;
         }
-
         body.dark .info-box {
-            background: rgba(40, 30, 55, 0.6);
+            background: rgba(0, 26, 51, 0.6);
         }
-
         body.dark .center-image {
             background: #1a1a1a;
         }
-
         body.dark .center-image img {
             opacity: 0.7;
         }
-
         body.dark .illustration {
-            background: linear-gradient(135deg, #0f1a24 0%, #1a0f24 100%);
+            background: linear-gradient(135deg, #001a33 0%, #000d1a 100%);
         }
     </style>
 </head>
@@ -612,22 +521,17 @@
     <div class="settings-overlay" id="settingsOverlay">
         <div class="settings-popup">
             <h1>Instellingen</h1>
-
             <label>E-mail wijzigen</label>
             <input type="email" placeholder="nieuw e-mail">
-
             <label>Telefoonnummer</label>
             <input type="text" placeholder="nieuw nummer">
-
             <div class="darkmode-row">
                 <span>Darkmode</span>
                 <input type="checkbox" id="darkToggle">
             </div>
-
             <button id="closeSettings">return</button>
         </div>
     </div>
-
     <!-- Header -->
     <div class="header">
         <div class="logo">
@@ -638,7 +542,6 @@
             <p>Ministerie van Justitie en Veiligheid</p>
         </div>
     </div>
-
     <!-- Navigation -->
     <div class="navbar">
         <div class="nav-left">
@@ -655,7 +558,6 @@
             </div>
         </div>
     </div>
-
     <!-- Main Container -->
     <div class="main-container">
         <!-- Left Sidebar -->
@@ -683,12 +585,10 @@
                 Op deze website vind u alles over de functies binnen het Centraal justitieel incassobureau en hoe u hier in kan door groeien.
             </div>
         </div>
-
         <!-- Center Image -->
         <div class="center-image">
             <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?uto=format&fit=crop&w=1400&q=80" alt="Team collaboration">
         </div>
-
         <!-- Right Sidebar -->
         <div class="right-sidebar">
             <div class="menu-items">
@@ -720,22 +620,18 @@
             </div>
         </div>
     </div>
-
     <!-- JavaScript verplaatst naar het einde -->
     <script>
         const openBtn = document.getElementById('openSettings');
         const closeBtn = document.getElementById('closeSettings');
         const overlay = document.getElementById('settingsOverlay');
         const darkToggle = document.getElementById('darkToggle');
-
         openBtn.onclick = () => {
             overlay.style.display = 'flex';
         };
-
         closeBtn.onclick = () => {
             overlay.style.display = 'none';
         };
-
         darkToggle.onchange = () => {
             document.body.classList.toggle('dark');
         };
