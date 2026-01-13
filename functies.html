@@ -6,7 +6,6 @@
     <title>Alle Functies - Centraal Justitieel Incassobureau</title>
     <style>
         * {
-
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -16,7 +15,6 @@
             overflow-x: hidden;
             background: #f5f5f5;
         }
-        /* Header */
         .header {
             background: white;
             padding: 20px 50px;
@@ -33,33 +31,21 @@
         .logo {
             width: 80px;
             height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-        .logo svg {
-            width: 40px;
-            height: 40px;
-            fill: white;
         }
         .header-text h1 {
             font-size: 19px;
             color: #1a1a1a;
             font-weight: 600;
-            margin-bottom: 4px;
         }
         .header-text p {
             font-size: 13px;
             color: #666;
             font-style: italic;
         }
-        /* Navigation */
         .navbar {
             background: #c6b8cf;
             display: flex;
             justify-content: space-between;
-            align-items: center;
             padding: 0;
         }
         .nav-left {
@@ -69,14 +55,8 @@
         .nav-item {
             padding: 12px 24px;
             color: #1a1a1a;
-            text-decoration: none;
-            display: inline-block;
             font-size: 14px;
             cursor: pointer;
-            transition: background 0.2s;
-        }
-        .nav-item:hover {
-            background: rgba(0,0,0,0.05);
         }
         .nav-item.active {
             background: rgba(0,0,0,0.1);
@@ -89,24 +69,19 @@
         }
         .nav-right {
             display: flex;
-            align-items: center;
             gap: 30px;
             padding-right: 30px;
+            align-items: center;
         }
         .nav-right-item {
             color: #1a1a1a;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
             font-size: 14px;
+            cursor: pointer;
         }
-        /* Main Layout */
         .main-layout {
             display: flex;
             height: calc(100vh - 130px);
         }
-        /* Sidebar */
         .sidebar {
             width: 350px;
             background: white;
@@ -117,24 +92,7 @@
         .search-box {
             padding: 20px;
             border-bottom: 1px solid #ddd;
-            display: flex;
-            align-items: center;
-            gap: 10px;
             background: #f9f9f9;
-        }
-        .search-box span {
-            flex: 1;
-            font-size: 14px;
-            color: #333;
-            font-weight: 500;
-        }
-        .search-box button {
-            background: transparent;
-            color: #333;
-            border: none;
-            padding: 5px;
-            cursor: pointer;
-            font-size: 20px;
         }
         .add-function-btn {
             margin: 15px 20px;
@@ -146,10 +104,23 @@
             cursor: pointer;
             font-size: 14px;
             font-weight: 600;
-            transition: background 0.2s;
         }
         .add-function-btn:hover {
             background: #6d3a8a;
+        }
+        .reset-btn {
+            margin: 0 20px 15px 20px;
+            padding: 10px 20px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .reset-btn:hover {
+            background: #c0392b;
         }
         .function-list {
             flex: 1;
@@ -160,9 +131,8 @@
             border-bottom: 1px solid #eee;
             cursor: pointer;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            transition: background 0.2s;
+            align-items: center;
             background: white;
         }
         .function-item:hover {
@@ -172,25 +142,28 @@
             background: #582f71;
             color: white;
         }
-        .function-item span {
-            font-size: 15px;
+        .function-name {
+            flex: 1;
         }
-        .function-arrow {
+        .delete-btn {
+            background: transparent;
+            border: none;
             font-size: 18px;
+            cursor: pointer;
+            padding: 5px 10px;
+            opacity: 0.6;
+            transition: opacity 0.2s;
         }
-        /* Content Area */
+        .delete-btn:hover {
+            opacity: 1;
+        }
+        .function-item.active .delete-btn {
+            color: white;
+        }
         .content-area {
             flex: 1;
             background: #e8e8e8;
             position: relative;
-            overflow: hidden;
-        }
-        .background-image {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.5;
         }
         .content-card {
             position: absolute;
@@ -203,42 +176,18 @@
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            z-index: 10;
         }
         .content-header {
             padding: 25px;
             border-bottom: 1px solid rgba(255,255,255,0.2);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
         }
         .content-header h2 {
             font-size: 32px;
             font-weight: 600;
         }
-        .bookmark-section {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .bookmark-text {
-            font-size: 12px;
-            opacity: 0.9;
-        }
-        .bookmark-icon {
-            font-size: 24px;
-            cursor: pointer;
-            transition: opacity 0.2s;
-        }
-        .bookmark-icon:hover {
-            opacity: 0.7;
-        }
         .content-section {
             padding: 25px;
             border-bottom: 1px solid rgba(255,255,255,0.2);
-        }
-        .content-section:last-of-type {
-            border-bottom: none;
         }
         .content-section h3 {
             font-size: 16px;
@@ -248,17 +197,12 @@
         .content-section p {
             font-size: 14px;
             line-height: 1.6;
-            opacity: 0.95;
         }
         .content-footer {
             padding: 20px 25px;
             display: flex;
             justify-content: space-between;
-            align-items: center;
             background: rgba(0,0,0,0.1);
-        }
-        .content-footer span {
-            font-size: 14px;
         }
         .mbo-badge {
             background: rgba(255,255,255,0.2);
@@ -267,15 +211,22 @@
             font-size: 13px;
             font-weight: 600;
         }
-        /* Popup Overlay */
+        
+        /* POPUP */
         .popup-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.6);
             display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 99999;
+        }
+        .popup-overlay.active {
+            display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 9999;
         }
         .popup-form {
             width: 600px;
@@ -283,7 +234,6 @@
             background: white;
             border-radius: 10px;
             padding: 40px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
         .popup-form h2 {
             font-size: 28px;
@@ -327,78 +277,22 @@
             font-size: 15px;
             font-weight: 600;
             cursor: pointer;
-            transition: background 0.2s;
         }
         .btn-submit {
             background: #582f71;
             color: white;
         }
-        .btn-submit:hover {
-            background: #6d3a8a;
-        }
         .btn-cancel {
             background: #e0e0e0;
             color: #333;
         }
-        .btn-cancel:hover {
-            background: #d0d0d0;
-        }
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .main-layout {
-                flex-direction: column;
-                height: auto;
-            }
-            .sidebar {
-                width: 100%;
-                max-height: 400px;
-            }
-            .content-area {
-                min-height: 500px;
-            }
-            .content-card {
-                position: static;
-                transform: none;
-                width: 90%;
-                margin: 40px auto;
-            }
-        }
-        @media (max-width: 768px) {
-            .header {
-                padding: 15px 20px;
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .navbar {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .nav-left,
-            .nav-right {
-                width: 100%;
-                flex-wrap: wrap;
-            }
-            .nav-right {
-                padding-left: 24px;
-                padding-top: 10px;
-                padding-bottom: 10px;
-            }
-            .sidebar {
-                max-height: 300px;
-            }
-            .content-card {
-                width: 95%;
-                margin: 20px auto;
-            }
-        }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <div class="header">
         <div class="header-left">
             <div class="logo">
-                <img src="Logo_rijksoverheid.svg.png" alt="Rijksoverheid Logo" style="width: 100%; height: 100%; object-fit: contain;">
+                <img src="Logo_rijksoverheid.svg.png" alt="Logo" style="width: 100%; height: 100%; object-fit: contain;">
             </div>
             <div class="header-text">
                 <h1>Centraal Justitieel Incassobureau</h1>
@@ -406,15 +300,13 @@
             </div>
         </div>
     </div>
-    <!-- Navigation -->
+
     <div class="navbar">
         <div class="nav-left">
             <a href="index.html" style="text-decoration: none; color: inherit;">
                 <div class="home-icon">🏠</div>
             </a>
-            <a href="https://www.cjib.nl/over-ons/wat-is-het-cjib" style="text-decoration: none; color: inherit;">
-                <div class="nav-item">Over ons</div>
-            </a>
+            <div class="nav-item" onclick="window.open('https://www.cjib.nl/over-ons/wat-is-het-cjib', '_blank')" style="cursor: pointer;">Over ons</div>
             <div class="nav-item active">alle functies binnen cjib</div>
             <div class="nav-item">Rol: gebruiker</div>
         </div>
@@ -423,67 +315,58 @@
             <div class="nav-right-item">🇳🇱 NL</div>
         </div>
     </div>
-    <!-- Main Layout -->
+
     <div class="main-layout">
-        <!-- Sidebar -->
         <div class="sidebar">
             <div class="search-box">
                 <span>zoek filters</span>
-                <button>↓</button>
             </div>
-            <button class="add-function-btn" id="addFunctionBtn">➕ Nieuwe functie toevoegen</button>
-            <div class="function-list" id="functionList">
-                <!-- Functies worden hier dynamisch geladen -->
-            </div>
+            <button class="add-function-btn" id="addBtn">➕ Nieuwe functie toevoegen</button>
+            <div class="function-list" id="functionList"></div>
         </div>
-        <!-- Content Area -->
+
         <div class="content-area">
-            <img src="data:image/svg+xml,%3Csvg width='1000' height='800' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23d5d5d5;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%23e8e8e8;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23g)'/%3E%3C/svg%3E" alt="Background" class="background-image">
             <div class="content-card">
                 <div class="content-header">
-                    <h2></h2>
-                    <div class="bookmark-section">
-                        <span class="bookmark-text">functie opslaan</span>
-                        <span class="bookmark-icon">🔖</span>
-                    </div>
+                    <h2 id="cardTitle">Titel</h2>
                 </div>
                 <div class="content-section">
                     <h3>Beschrijving</h3>
-                    <p></p>
+                    <p id="cardDesc">Beschrijving</p>
                 </div>
                 <div class="content-section">
                     <h3>Benodigdheden</h3>
-                    <p></p>
+                    <p id="cardBenodigd">Benodigdheden</p>
                 </div>
                 <div class="content-footer">
                     <span>Opleiding</span>
-                    <span class="mbo-badge"></span>
+                    <span class="mbo-badge" id="cardOpleiding">MBO</span>
                 </div>
             </div>
         </div>
     </div>
-    
-    <!-- Popup voor nieuwe functie -->
-    <div class="popup-overlay" id="popupOverlay">
+
+    <!-- POPUP -->
+    <div class="popup-overlay" id="popup">
         <div class="popup-form">
             <h2>Nieuwe functie aanmaken</h2>
-            <form id="newFunctionForm">
+            <form id="form">
                 <div class="form-group">
                     <label>Functie titel *</label>
-                    <input type="text" id="functieTitel" placeholder="Bijv. Software Developer" required>
+                    <input type="text" id="titel" required>
                 </div>
                 <div class="form-group">
                     <label>Beschrijving *</label>
-                    <textarea id="functieBeschrijving" placeholder="Wat zijn de hoofdtaken van deze functie?" required></textarea>
+                    <textarea id="beschrijving" required></textarea>
                 </div>
                 <div class="form-group">
                     <label>Benodigdheden *</label>
-                    <textarea id="functieBenodigdheden" placeholder="Welke opleiding en vaardigheden zijn nodig?" required></textarea>
+                    <textarea id="benodigd" required></textarea>
                 </div>
                 <div class="form-group">
                     <label>Opleiding niveau *</label>
-                    <select id="functieOpleiding" required>
-                        <option value="">Kies een niveau</option>
+                    <select id="opleiding" required>
+                        <option value="">Kies</option>
                         <option value="MBO">MBO</option>
                         <option value="HBO">HBO</option>
                         <option value="WO">WO</option>
@@ -491,183 +374,123 @@
                 </div>
                 <div class="form-buttons">
                     <button type="button" class="btn-cancel" id="cancelBtn">Annuleren</button>
-                    <button type="submit" class="btn-submit">Functie toevoegen</button>
+                    <button type="submit" class="btn-submit">Toevoegen</button>
                 </div>
             </form>
         </div>
     </div>
-    
+
     <script>
-const functies = {
-  1: {
-    titel: "Medewerker Administratie",
-    beschrijving: "Verantwoordelijk voor het verwerken, controleren en bijhouden van administratieve en financiële gegevens binnen het CJIB.",
-    benodigd: "MBO-diploma in administratieve richting. Basiskennis administratie, nauwkeurig werken en ervaring met computersystemen. Ervaring in administratief werk is gewenst.",
-    opleiding: "MBO"
-  },
-  2: {
-    titel: "Juridisch Medewerker",
-    beschrijving: "Ondersteunt bij juridische processen zoals het controleren van dossiers en het behandelen van bezwaren.",
-    benodigd: "HBO-diploma in juridische richting. Kennis van wet- en regelgeving en ervaring met dossierbehandeling is een pré.",
-    opleiding: "HBO"
-  },
-  3: {
-    titel: "Klantenservice Medewerker",
-    beschrijving: "Beantwoordt vragen van burgers over boetes, betalingen en procedures.",
-    benodigd: "MBO-diploma. Goede communicatieve vaardigheden en bij voorkeur ervaring in klantenservice.",
-    opleiding: "MBO"
-  },
-  4: {
-    titel: "Behandelaar Bezwaar",
-    beschrijving: "Beoordeelt ingediende bezwaren en neemt beslissingen volgens vastgestelde regels.",
-    benodigd: "HBO-diploma, bij voorkeur juridisch. Analytisch vermogen en ervaring met bezwaarprocedures is gewenst.",
-    opleiding: "HBO"
-  },
-  5: {
-    titel: "Financieel Medewerker",
-    beschrijving: "Beheert en controleert financiële transacties en betalingen.",
-    benodigd: "MBO-diploma in financiële of administratieve richting. Cijfermatig inzicht en ervaring met financiële administratie.",
-    opleiding: "MBO"
-  },
-  6: {
-    titel: "ICT Support Medewerker",
-    beschrijving: "Ondersteunt medewerkers bij technische problemen met systemen en software.",
-    benodigd: "MBO-diploma ICT. Technisch inzicht en ervaring met computer- en softwaresupport.",
-    opleiding: "MBO"
-  },
-  7: {
-    titel: "Data Analist",
-    beschrijving: "Analyseert gegevens om processen en prestaties inzichtelijk te maken.",
-    benodigd: "HBO-diploma in data, ICT of economie. Ervaring met data-analyse en rapportages.",
-    opleiding: "HBO"
-  },
-  8: {
-    titel: "Teamleider",
-    beschrijving: "Stuurt een team aan en bewaakt de kwaliteit en voortgang van het werk.",
-    benodigd: "HBO-diploma. Leidinggevende ervaring en goede organisatorische vaardigheden.",
-    opleiding: "HBO"
-  },
-  9: {
-    titel: "Communicatie Medewerker",
-    beschrijving: "Verzorgt interne en externe communicatie van de organisatie.",
-    benodigd: "HBO-diploma communicatie of media. Ervaring met schrijven en communicatie is gewenst.",
-    opleiding: "HBO"
-  },
-  10: {
-    titel: "HR Medewerker",
-    beschrijving: "Ondersteunt personeelszaken zoals administratie en begeleiding van medewerkers.",
-    benodigd: "MBO-diploma HR of administratie. Ervaring met personeelsadministratie is een pré.",
-    opleiding: "MBO"
-  }
-};
+        // Data
+        const defaultData = {
+            1: { titel: "Medewerker Administratie", beschrijving: "Verantwoordelijk voor het verwerken, controleren en bijhouden van administratieve en financiële gegevens binnen het CJIB.", benodigd: "MBO-diploma in administratieve richting. Basiskennis administratie, nauwkeurig werken en ervaring met computersystemen.", opleiding: "MBO" },
+            2: { titel: "Juridisch Medewerker", beschrijving: "Ondersteunt bij juridische processen zoals het controleren van dossiers en het behandelen van bezwaren.", benodigd: "HBO-diploma in juridische richting. Kennis van wet- en regelgeving en ervaring met dossierbehandeling.", opleiding: "HBO" },
+            3: { titel: "Klantenservice Medewerker", beschrijving: "Beantwoordt vragen van burgers over boetes, betalingen en procedures.", benodigd: "MBO-diploma. Goede communicatieve vaardigheden en bij voorkeur ervaring in klantenservice.", opleiding: "MBO" },
+            4: { titel: "Behandelaar Bezwaar", beschrijving: "Beoordeelt ingediende bezwaren en neemt beslissingen volgens vastgestelde regels.", benodigd: "HBO-diploma, bij voorkeur juridisch. Analytisch vermogen en ervaring met bezwaarprocedures.", opleiding: "HBO" },
+            5: { titel: "Financieel Medewerker", beschrijving: "Beheert en controleert financiële transacties en betalingen.", benodigd: "MBO-diploma in financiële of administratieve richting. Cijfermatig inzicht en ervaring met financiële administratie.", opleiding: "MBO" },
+            6: { titel: "ICT Support Medewerker", beschrijving: "Ondersteunt medewerkers bij technische problemen met systemen en software.", benodigd: "MBO-diploma ICT. Technisch inzicht en ervaring met computer- en softwaresupport.", opleiding: "MBO" },
+            7: { titel: "Data Analist", beschrijving: "Analyseert gegevens om processen en prestaties inzichtelijk te maken.", benodigd: "HBO-diploma in data, ICT of economie. Ervaring met data-analyse en rapportages.", opleiding: "HBO" },
+            8: { titel: "Teamleider", beschrijving: "Stuurt een team aan en bewaakt de kwaliteit en voortgang van het werk.", benodigd: "HBO-diploma. Leidinggevende ervaring en goede organisatorische vaardigheden.", opleiding: "HBO" },
+            9: { titel: "Communicatie Medewerker", beschrijving: "Verzorgt interne en externe communicatie van de organisatie.", benodigd: "HBO-diploma communicatie of media. Ervaring met schrijven en communicatie is gewenst.", opleiding: "HBO" },
+            10: { titel: "HR Medewerker", beschrijving: "Ondersteunt personeelszaken zoals administratie en begeleiding van medewerkers.", benodigd: "MBO-diploma HR of administratie. Ervaring met personeelsadministratie is een pré.", opleiding: "MBO" }
+        };
 
-// Element referenties
-const functionList = document.getElementById('functionList');
-const titel = document.querySelector('.content-header h2');
-const beschrijving = document.querySelectorAll('.content-section p')[0];
-const benodigd = document.querySelectorAll('.content-section p')[1];
-const opleiding = document.querySelector('.mbo-badge');
-const addFunctionBtn = document.getElementById('addFunctionBtn');
-const popupOverlay = document.getElementById('popupOverlay');
-const cancelBtn = document.getElementById('cancelBtn');
-const newFunctionForm = document.getElementById('newFunctionForm');
+        let functies = JSON.parse(localStorage.getItem('cjib_functies')) || {...defaultData};
 
-// Functie om lijst te renderen
-function renderFuncties() {
-  functionList.innerHTML = '';
-  Object.keys(functies).forEach(id => {
-    const div = document.createElement('div');
-    div.className = 'function-item';
-    div.dataset.function = id;
-    div.innerHTML = `
-      <span>${functies[id].titel}</span>
-      <span class="function-arrow">→</span>
-    `;
-    functionList.appendChild(div);
-  });
-  addClickListeners();
-}
+        function save() {
+            localStorage.setItem('cjib_functies', JSON.stringify(functies));
+        }
 
-// Voeg click listeners toe aan functie items
-function addClickListeners() {
-  const functionItems = document.querySelectorAll('.function-item');
-  functionItems.forEach(item => {
-    item.addEventListener('click', function() {
-      document.querySelectorAll('.function-item').forEach(i => i.classList.remove('active'));
-      this.classList.add('active');
-      laadFunctie(this.dataset.function);
-    });
-  });
-}
+        function resetFuncties() {
+            if (confirm('Weet je zeker dat je alle functies wilt resetten naar de originele 10? Alle toegevoegde functies worden verwijderd!')) {
+                localStorage.setItem('cjib_functies', JSON.stringify(defaultData));
+                functies = {...defaultData};
+                render();
+                if (Object.keys(functies).length > 0) {
+                    document.querySelector('.function-item').click();
+                }
+                alert('Functies zijn gereset naar de originele 10!');
+            }
+        }
 
-// Laad functie details
-function laadFunctie(id) {
-  titel.textContent = functies[id].titel;
-  beschrijving.textContent = functies[id].beschrijving;
-  benodigd.textContent = functies[id].benodigd;
-  opleiding.textContent = functies[id].opleiding;
-}
+        function render() {
+            const list = document.getElementById('functionList');
+            list.innerHTML = '';
+            Object.keys(functies).forEach(id => {
+                const div = document.createElement('div');
+                div.className = 'function-item';
+                div.innerHTML = `
+                    <span class="function-name">${functies[id].titel}</span>
+                    <button class="delete-btn" onclick="deleteFunctie(${id}, event)">🗑️</button>
+                    <span>→</span>
+                `;
+                div.onclick = () => {
+                    document.querySelectorAll('.function-item').forEach(i => i.classList.remove('active'));
+                    div.classList.add('active');
+                    show(id);
+                };
+                list.appendChild(div);
+            });
+        }
 
-// Initialiseer
-renderFuncties();
-document.querySelector('.function-item').classList.add('active');
-laadFunctie(1);
+        function deleteFunctie(id, event) {
+            event.stopPropagation(); // Stop dat functie wordt geselecteerd
+            
+            if (confirm('Weet je zeker dat je deze functie wilt verwijderen?')) {
+                delete functies[id];
+                save();
+                render();
+                
+                // Toon eerste functie als er nog functies zijn
+                if (Object.keys(functies).length > 0) {
+                    document.querySelector('.function-item').click();
+                } else {
+                    // Maak card leeg als er geen functies meer zijn
+                    document.getElementById('cardTitle').textContent = 'Geen functies';
+                    document.getElementById('cardDesc').textContent = '';
+                    document.getElementById('cardBenodigd').textContent = '';
+                    document.getElementById('cardOpleiding').textContent = '';
+                }
+            }
+        }
 
-// Popup functionaliteit
-addFunctionBtn.addEventListener('click', () => {
-  popupOverlay.style.display = 'flex';
-});
+        function show(id) {
+            document.getElementById('cardTitle').textContent = functies[id].titel;
+            document.getElementById('cardDesc').textContent = functies[id].beschrijving;
+            document.getElementById('cardBenodigd').textContent = functies[id].benodigd;
+            document.getElementById('cardOpleiding').textContent = functies[id].opleiding;
+        }
 
-cancelBtn.addEventListener('click', () => {
-  popupOverlay.style.display = 'none';
-  newFunctionForm.reset();
-});
+        render();
+        if (Object.keys(functies).length > 0) {
+            document.querySelector('.function-item').click();
+        }
 
-popupOverlay.addEventListener('click', (e) => {
-  if (e.target === popupOverlay) {
-    popupOverlay.style.display = 'none';
-    newFunctionForm.reset();
-  }
-});
+        // Popup
+        document.getElementById('addBtn').onclick = function() {
+            document.getElementById('popup').classList.add('active');
+        };
 
-newFunctionForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  
-  // Haal de hoogste ID op en voeg 1 toe
-  const newId = Math.max(...Object.keys(functies).map(Number)) + 1;
-  
-  // Maak nieuwe functie aan
-  functies[newId] = {
-    titel: document.getElementById('functieTitel').value,
-    beschrijving: document.getElementById('functieBeschrijving').value,
-    benodigd: document.getElementById('functieBenodigdheden').value,
-    opleiding: document.getElementById('functieOpleiding').value
-  };
-  
-  // Herlaad de lijst
-  renderFuncties();
-  
-  // Sluit popup en reset formulier
-  popupOverlay.style.display = 'none';
-  newFunctionForm.reset();
-  
-  // Toon de nieuwe functie
-  const newItem = document.querySelector(`[data-function="${newId}"]`);
-  if (newItem) {
-    newItem.click();
-  }
-  
-  alert('Functie succesvol toegevoegd!');
-});
+        document.getElementById('cancelBtn').onclick = function() {
+            document.getElementById('popup').classList.remove('active');
+            document.getElementById('form').reset();
+        };
 
-// Bookmark functionaliteit
-const bookmarkIcon = document.querySelector('.bookmark-icon');
-let isBookmarked = false;
-bookmarkIcon.addEventListener('click', function () {
-  isBookmarked = !isBookmarked;
-  this.style.opacity = isBookmarked ? '0.6' : '1';
-});
-</script>
-
+        document.getElementById('form').onsubmit = function(e) {
+            e.preventDefault();
+            const newId = Math.max(...Object.keys(functies).map(Number)) + 1;
+            functies[newId] = {
+                titel: document.getElementById('titel').value,
+                beschrijving: document.getElementById('beschrijving').value,
+                benodigd: document.getElementById('benodigd').value,
+                opleiding: document.getElementById('opleiding').value
+            };
+            save();
+            render();
+            document.getElementById('popup').classList.remove('active');
+            document.getElementById('form').reset();
+            alert('Functie toegevoegd!');
+        };
+    </script>
 </body>
 </html>
