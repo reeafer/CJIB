@@ -39,12 +39,6 @@
             flex-shrink: 0;
         }
 
-        .logo svg {
-            width: 32px;
-            height: 32px;
-            fill: white;
-        }
-
         .header-text h1 {
             font-size: 18px;
             color: #1a1a1a;
@@ -135,120 +129,6 @@
             display: flex;
             height: calc(100vh - 112px);
             min-height: 500px;
-        }
-
-        /* Responsive */
-        @media (max-width: 1200px) {
-            .main-container {
-                flex-direction: column;
-                height: auto;
-            }
-
-            .left-sidebar,
-            .right-sidebar {
-                width: 100%;
-            }
-
-            .center-image {
-                height: 400px;
-            }
-
-            .info-box {
-                margin-top: 30px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header {
-                padding: 15px 20px;
-                flex-wrap: wrap;
-            }
-
-            .header-text h1 {
-                font-size: 16px;
-            }
-
-            .header-text p {
-                font-size: 12px;
-            }
-
-            .navbar {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .nav-left,
-            .nav-right {
-                width: 100%;
-                flex-wrap: wrap;
-            }
-
-            .nav-right {
-                padding-left: 22px;
-                padding-top: 10px;
-                padding-bottom: 10px;
-            }
-
-            .profile-header {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-
-            .contact-info {
-                font-size: 12px;
-            }
-
-            .center-image {
-                height: 300px;
-            }
-
-            .illustration {
-                height: 200px;
-                padding: 30px 15px;
-            }
-
-            .person-head {
-                width: 35px !important;
-                height: 35px !important;
-            }
-
-            .person-body {
-                width: 40px !important;
-                height: 60px !important;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .logo {
-                width: 48px;
-                height: 48px;
-            }
-
-            .logo svg {
-                width: 28px;
-                height: 28px;
-            }
-
-            .nav-item {
-                padding: 10px 15px;
-                font-size: 13px;
-            }
-
-            .home-icon {
-                font-size: 22px;
-                padding: 8px 15px;
-            }
-
-            .menu-button {
-                padding: 14px 18px;
-                font-size: 15px;
-            }
-
-            .left-sidebar,
-            .right-sidebar {
-                padding: 20px;
-            }
         }
 
         /* Left Sidebar */
@@ -377,12 +257,6 @@
             background: #9d8dba;
         }
 
-        .menu-button a {
-            color: white;
-            text-decoration: none;
-            display: block;
-        }
-
         /* Illustration */
         .illustration {
             margin-top: auto;
@@ -408,7 +282,6 @@
             width: 45px;
             height: 45px;
             border-radius: 50%;
-            background: #f4a261;
             margin-bottom: 5px;
         }
 
@@ -530,7 +403,8 @@
         }
 
         .settings-popup button {
-            margin-top: 40px;
+            margin-top: 20px;
+            margin-right: 10px;
             padding: 10px 20px;
             background: #d1c4d9;
             border: none;
@@ -538,7 +412,7 @@
             border-radius: 4px;
         }
 
-        /* ===== DARK MODE VOOR HELE PAGINA ===== */
+        /* ===== DARK MODE ===== */
         body.dark {
             background: #0a0a0a;
         }
@@ -614,17 +488,18 @@
             <h1>Instellingen</h1>
 
             <label>E-mail wijzigen</label>
-            <input type="email" placeholder="nieuw e-mail">
+            <input type="email" id="emailInput" placeholder="nieuw e-mail">
 
             <label>Telefoonnummer</label>
-            <input type="text" placeholder="nieuw nummer">
+            <input type="text" id="telInput" placeholder="nieuw nummer">
 
             <div class="darkmode-row">
                 <span>Darkmode</span>
                 <input type="checkbox" id="darkToggle">
             </div>
 
-            <button id="closeSettings">return</button>
+            <button id="saveSettings">Opslaan</button>
+            <button id="closeSettings">Annuleren</button>
         </div>
     </div>
 
@@ -671,11 +546,11 @@
                 <div class="contact-info">
                     <div class="contact-item">
                         <span>📧</span>
-                        <span>505814@student.frida.nl</span>
+                        <span id="displayEmail">505814@student.frida.nl</span>
                     </div>
                     <div class="contact-item">
                         <span>📞</span>
-                        <span>0630830446</span>
+                        <span id="displayTel">0630830446</span>
                     </div>
                 </div>
             </div>
@@ -693,7 +568,7 @@
         <div class="right-sidebar">
             <div class="menu-items">
                 <button class="menu-button">jouw vervolg stap</button>
-                <button class="menu-button">route planner</button>
+                <button class="menu-button" onclick="window.location.href='routeplanner.html'" style="cursor: pointer;">route planner</button>
                 <button class="menu-button">opgeslagen functies</button>
                 <button class="menu-button" onclick="window.open('https://www.cjib.nl/over-ons/wat-is-het-cjib', '_blank')">CJIB Over ons</button>
             </div>
@@ -721,23 +596,71 @@
         </div>
     </div>
 
-    <!-- JavaScript verplaatst naar het einde -->
     <script>
         const openBtn = document.getElementById('openSettings');
         const closeBtn = document.getElementById('closeSettings');
+        const saveBtn = document.getElementById('saveSettings');
         const overlay = document.getElementById('settingsOverlay');
         const darkToggle = document.getElementById('darkToggle');
+        const emailInput = document.getElementById('emailInput');
+        const telInput = document.getElementById('telInput');
+        const displayEmail = document.getElementById('displayEmail');
+        const displayTel = document.getElementById('displayTel');
+
+        // Laad opgeslagen gegevens
+        function loadSettings() {
+            const savedEmail = localStorage.getItem('user_email');
+            const savedTel = localStorage.getItem('user_tel');
+            
+            if (savedEmail) {
+                displayEmail.textContent = savedEmail;
+            }
+            if (savedTel) {
+                displayTel.textContent = savedTel;
+            }
+        }
+
+        // Check darkmode
+        if (localStorage.getItem('darkmode') === 'enabled') {
+            document.body.classList.add('dark');
+            darkToggle.checked = true;
+        }
+
+        // Laad instellingen
+        loadSettings();
 
         openBtn.onclick = () => {
             overlay.style.display = 'flex';
+            emailInput.value = displayEmail.textContent;
+            telInput.value = displayTel.textContent;
         };
 
         closeBtn.onclick = () => {
             overlay.style.display = 'none';
         };
 
+        saveBtn.onclick = () => {
+            if (emailInput.value.trim()) {
+                localStorage.setItem('user_email', emailInput.value.trim());
+                displayEmail.textContent = emailInput.value.trim();
+            }
+            if (telInput.value.trim()) {
+                localStorage.setItem('user_tel', telInput.value.trim());
+                displayTel.textContent = telInput.value.trim();
+            }
+            
+            overlay.style.display = 'none';
+            alert('Instellingen opgeslagen!');
+        };
+
         darkToggle.onchange = () => {
-            document.body.classList.toggle('dark');
+            if (darkToggle.checked) {
+                document.body.classList.add('dark');
+                localStorage.setItem('darkmode', 'enabled');
+            } else {
+                document.body.classList.remove('dark');
+                localStorage.setItem('darkmode', 'disabled');
+            }
         };
     </script>
 </body>
