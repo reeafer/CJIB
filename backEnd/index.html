@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rijksoverheid</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background: white;
+            transition: background 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            padding: 18px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s ease;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .header-text h1 {
+            font-size: 18px;
+            color: #1a1a1a;
+            font-weight: 600;
+            margin-bottom: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .header-text p {
+            font-size: 13px;
+            color: #666;
+            font-style: italic;
+            transition: color 0.3s ease;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: #c6b8cf;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0;
+            transition: background 0.3s ease;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-item {
+            padding: 12px 22px;
+            color: #1a1a1a;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s, color 0.3s ease;
+        }
+
+        .nav-item:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-item a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .home-icon {
+            font-size: 26px;
+            padding: 10px 22px;
+            cursor: pointer;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            padding-right: 30px;
+        }
+
+        .nav-right-item {
+            color: #1a1a1a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .user-icon {
+            width: 26px;
+            height: 26px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+
+        /* Main Layout */
+        .main-container {
+            display: flex;
+            flex: 1;
+            min-height: 500px;
+        }
+
+        /* Left Sidebar */
+        .left-sidebar {
+            width: 280px;
+            background: linear-gradient(180deg, #582f71 0%, #4a2660 40%, #3b1c4d 100%);
+            color: white;
+            padding: 30px 25px;
+            display: flex;
+            flex-direction: column;
+            transition: background 0.3s ease;
+        }
+
+        .profile-section {
+            margin-bottom: 30px;
+        }
+
+        .profile-header {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .avatar {
+            width: 64px;
+            height: 64px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            flex-shrink: 0;
+        }
+
+        .profile-info h2 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .profile-info p {
+            font-size: 12px;
+            opacity: 0.95;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 13px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-box {
+            margin-top: 160px;
+            background: rgba(107, 91, 149, 0.6);
+            padding: 25px;
+            border-radius: 8px;
+            line-height: 1.6;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+
+        .info-box::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: white;
+            margin-top: 20px;
+        }
+
+        /* Center Image */
+        .center-image {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            background: #f5f5f5;
+            transition: background 0.3s ease;
+        }
+
+        .center-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Right Sidebar */
+        .right-sidebar {
+            width: 380px;
+            background: linear-gradient(180deg, #582f71 0%, #4a2660 100%);
+            padding: 30px 25px;
+            display: flex;
+            flex-direction: column;
+            transition: background 0.3s ease;
+        }
+
+        .menu-items {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .menu-button {
+            background: #8b7ba8;
+            color: white;
+            padding: 16px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.2s;
+            border: none;
+            text-align: left;
+        }
+
+        .menu-button:hover {
+            background: #9d8dba;
+        }
+
+        /* Illustration */
+        .illustration {
+            margin-top: auto;
+            background: linear-gradient(135deg, #e6f2ff 0%, #f0e6ff 100%);
+            border-radius: 40px;
+            padding: 40px 20px;
+            height: 240px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: background 0.3s ease;
+        }
+
+        .person {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .person-head {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            margin-bottom: 5px;
+        }
+
+        .person-body {
+            width: 50px;
+            height: 70px;
+            border-radius: 25px 25px 20px 20px;
+        }
+
+        .person-arm {
+            position: absolute;
+            width: 8px;
+            height: 40px;
+            border-radius: 4px;
+            transform-origin: top center;
+        }
+
+        .person1 {
+            left: 15%;
+        }
+
+        .person1 .person-head {
+            background: #f4a261;
+        }
+
+        .person1 .person-body {
+            background: #4a90e2;
+        }
+
+        .person1 .person-arm {
+            background: #ffd166;
+            top: 50px;
+            left: -5px;
+            transform: rotate(-45deg);
+        }
+
+        .person2 {
+            left: 42%;
+        }
+
+        .person2 .person-head {
+            background: #e76f51;
+        }
+
+        .person2 .person-body {
+            background: #ef476f;
+        }
+
+        .person2 .person-arm {
+            background: #06ffa5;
+            top: 50px;
+            right: -8px;
+            transform: rotate(45deg);
+        }
+
+        .person3 {
+            right: 15%;
+        }
+
+        .person3 .person-head {
+            background: #2a9d8f;
+        }
+
+        .person3 .person-body {
+            background: #a78bfa;
+        }
+
+        .person3 .person-arm {
+            background: #4ade80;
+            top: 50px;
+            right: -5px;
+            transform: rotate(45deg);
+        }
+
+        /* Footer */
+        .footer {
+            background: white;
+            padding: 25px 40px;
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s ease;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-section {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .footer-section h3 {
+            font-size: 14px;
+            color: #1a1a1a;
+            font-weight: 600;
+            margin-bottom: 5px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section p {
+            font-size: 13px;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-section a:hover {
+            color: #582f71;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .footer-logo-img {
+            width: 60px;
+            height: 60px;
+        }
+
+        .footer-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-text h3 {
+            font-size: 15px;
+            color: #1a1a1a;
+            font-weight: 600;
+            margin-bottom: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-text p {
+            font-size: 12px;
+            color: #666;
+            font-style: italic;
+            transition: color 0.3s ease;
+        }
+
+        /* INSTELLINGEN POPUP */
+        .settings-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .settings-popup {
+            width: 720px;
+            max-width: 90%;
+            background: #5b2d6f;
+            color: white;
+            padding: 50px;
+            border-radius: 10px;
+        }
+
+        .settings-popup h1 {
+            font-size: 42px;
+            margin-bottom: 30px;
+        }
+
+        .settings-popup label {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 6px;
+        }
+
+        .settings-popup input[type="email"],
+        .settings-popup input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border-radius: 4px;
+            border: none;
+        }
+
+        .darkmode-row {
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .settings-popup button {
+            margin-top: 20px;
+            margin-right: 10px;
+            padding: 10px 20px;
+            background: #d1c4d9;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        /* DARK MODE */
+        body.dark {
+            background: #0a0a0a;
+        }
+
+        body.dark .header {
+            background: #1a1a1a;
+            box-shadow: 0 2px 8px rgba(255, 255, 255, 0.05);
+        }
+
+        body.dark .header-text h1 {
+            color: #e0e0e0;
+        }
+
+        body.dark .header-text p {
+            color: #b0b0b0;
+        }
+
+        body.dark .navbar {
+            background: #2d2d2d;
+        }
+
+        body.dark .nav-item,
+        body.dark .nav-right-item {
+            color: #e0e0e0;
+        }
+
+        body.dark .nav-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        body.dark .user-icon {
+            background: #e0e0e0;
+            color: #1a1a1a;
+        }
+
+        body.dark .left-sidebar {
+            background: linear-gradient(180deg, #1a0f24 0%, #120a1a 40%, #0a0510 100%);
+        }
+
+        body.dark .right-sidebar {
+            background: linear-gradient(180deg, #1a0f24 0%, #120a1a 100%);
+        }
+
+        body.dark .menu-button {
+            background: #2d1f3a;
+        }
+
+        body.dark .menu-button:hover {
+            background: #3d2f4a;
+        }
+
+        body.dark .info-box {
+            background: rgba(40, 30, 55, 0.6);
+        }
+
+        body.dark .center-image {
+            background: #1a1a1a;
+        }
+
+        body.dark .center-image img {
+            opacity: 0.7;
+        }
+
+        body.dark .illustration {
+            background: linear-gradient(135deg, #0f1a24 0%, #1a0f24 100%);
+        }
+
+        body.dark .footer {
+            background: #1a1a1a;
+            box-shadow: 0 -2px 8px rgba(255, 255, 255, 0.05);
+        }
+
+        body.dark .footer-section h3,
+        body.dark .footer-text h3 {
+            color: #e0e0e0;
+        }
+
+        body.dark .footer-section p,
+        body.dark .footer-section a,
+        body.dark .footer-text p {
+            color: #b0b0b0;
+        }
+
+        body.dark .footer-section a:hover {
+            color: #c6b8cf;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- INSTELLINGEN POPUP -->
+    <div class="settings-overlay" id="settingsOverlay">
+        <div class="settings-popup">
+            <h1>Instellingen</h1>
+
+            <label>E-mail wijzigen</label>
+            <input type="email" id="emailInput" placeholder="nieuw e-mail">
+
+            <label>Telefoonnummer</label>
+            <input type="text" id="telInput" placeholder="nieuw nummer">
+
+            <div class="darkmode-row">
+                <span>Darkmode</span>
+                <input type="checkbox" id="darkToggle">
+            </div>
+
+            <button id="saveSettings">Opslaan</button>
+            <button id="closeSettings">Annuleren</button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">
+            <img src="Logo_rijksoverheid.svg.png" alt="Rijksoverheid Logo"
+                style="width: 100%; height: 100%; object-fit: contain;">
+        </div>
+        <div class="header-text" <h1> Rijksoverheid</h1>
+
+
+
+            <p>Ministerie van Justitie en Veiligheid</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="navbar">
+        <div class="nav-left">
+            <div class="home-icon">🏠</div>
+            <div class="nav-item"><a href="functies.html">Alle functies binnen Rijksoverheid</a></div>
+            <div class="nav-item" id="userRoleDisplay">Rol: Gast</div>
+        </div>
+        <div class="nav-right">
+            <div class="nav-right-item" id="openSettings">Instellingen ⚙️</div>
+            <div class="nav-right-item">NL</div>
+            <div class="nav-right-item" id="loginLink" style="cursor: pointer;">
+                Inloggen
+                <div class="user-icon">👤</div>
+            </div>
+        </div>
+    </div>
+    <script src="auth.js"></script>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Left Sidebar -->
+        <div class="left-sidebar">
+            <div class="profile-section">
+                <div class="profile-header">
+                    <div class="avatar">👤</div>
+                    <div class="profile-info">
+                        <h2>Team | Klik & Klaar</h2>
+                        <p>SOFTWARE DEVELOPER</p>
+                    </div>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span>📧</span>
+                        <span id="displayEmail">505814@student.frida.nl</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>📞</span>
+                        <span id="displayTel">0630830446</span>
+                    </div>
+                </div>
+            </div>
+            <div class="info-box">
+                Op deze website vind u alles over de functies binnen het Centraal justitieel incassobureau en hoe u hier
+                in kan door groeien.
+            </div>
+        </div>
+
+        <!-- Center Image -->
+        <div class="center-image">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?uto=format&fit=crop&w=1400&q=80"
+                alt="Team collaboration">
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="right-sidebar">
+            <div class="menu-items">
+                <button class="menu-button">jouw vervolg stap</button>
+                <button class="menu-button" onclick="window.location.href='routeplanner.html'"
+                    style="cursor: pointer;">route planner</button>
+                <button class="menu-button">opgeslagen functies</button>
+                <button class="menu-button"
+                    onclick="window.open('https://www.cjib.nl/over-ons/wat-is-het-cjib', '_blank')"> Over ons</button>
+            </div>
+
+            <div class="illustration">
+                <div class="person person1">
+                    <div class="person-head"></div>
+                    <div class="person-body">
+                        <div class="person-arm"></div>
+                    </div>
+                </div>
+                <div class="person person2">
+                    <div class="person-head"></div>
+                    <div class="person-body">
+                        <div class="person-arm"></div>
+                    </div>
+                </div>
+                <div class="person person3">
+                    <div class="person-head"></div>
+                    <div class="person-body">
+                        <div class="person-arm"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="Logo_rijksoverheid.svg.png" alt="Rijksoverheid Logo" class="footer-logo-img">
+                <div class="footer-text">
+                    <h3>Rijksoverheid</h3>
+                    <p>Ministerie van Justitie en Veiligheid</p>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>📞 <a href="tel:0888256256">088 - 825 62 56</a></p>
+                <p>📧 <a href="mailto:info@cjib.nl">inforijksoverheid.nl</a></p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Bezoekadres</h3>
+                <p>📍 Postbus 2772</p>
+                <p>3500 GT Leeuwarden</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Openingstijden</h3>
+                <p>🕐 Ma-Vr: 08:00 - 17:00</p>
+                <p>Weekend: Gesloten</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const openBtn = document.getElementById('openSettings');
+        const closeBtn = document.getElementById('closeSettings');
+        const saveBtn = document.getElementById('saveSettings');
+        const overlay = document.getElementById('settingsOverlay');
+        const darkToggle = document.getElementById('darkToggle');
+        const emailInput = document.getElementById('emailInput');
+        const telInput = document.getElementById('telInput');
+        const displayEmail = document.getElementById('displayEmail');
+        const displayTel = document.getElementById('displayTel');
+
+        // Laad opgeslagen gegevens
+        function loadSettings() {
+            const savedEmail = localStorage.getItem('user_email');
+            const savedTel = localStorage.getItem('user_tel');
+
+            if (savedEmail) {
+                displayEmail.textContent = savedEmail;
+            }
+            if (savedTel) {
+                displayTel.textContent = savedTel;
+            }
+        }
+
+        // Check darkmode
+        if (localStorage.getItem('darkmode') === 'enabled') {
+            document.body.classList.add('dark');
+            darkToggle.checked = true;
+        }
+
+        // Laad instellingen
+        loadSettings();
+
+        openBtn.onclick = () => {
+            overlay.style.display = 'flex';
+            emailInput.value = displayEmail.textContent;
+            telInput.value = displayTel.textContent;
+        };
+
+        closeBtn.onclick = () => {
+            overlay.style.display = 'none';
+        };
+
+        saveBtn.onclick = () => {
+            if (emailInput.value.trim()) {
+                localStorage.setItem('user_email', emailInput.value.trim());
+                displayEmail.textContent = emailInput.value.trim();
+            }
+            if (telInput.value.trim()) {
+                localStorage.setItem('user_tel', telInput.value.trim());
+                displayTel.textContent = telInput.value.trim();
+            }
+
+            overlay.style.display = 'none';
+            alert('Instellingen opgeslagen!');
+        };
+
+        darkToggle.onchange = () => {
+            if (darkToggle.checked) {
+                document.body.classList.add('dark');
+                localStorage.setItem('darkmode', 'enabled');
+            } else {
+                document.body.classList.remove('dark');
+                localStorage.setItem('darkmode', 'disabled');
+            }
+        };
+    </script>
+</body>
+
+</html>
