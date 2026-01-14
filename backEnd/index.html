@@ -75,18 +75,9 @@
             z-index: 10;
         }
 
-        .logo-container {
+        .logo {
             width: 80px;
             height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .logo {
-            max-width: 100%;
-            max-height: 100%;
             object-fit: contain;
         }
 
@@ -143,9 +134,6 @@
             color: var(--bg);
             border-radius: 50%;
             font-size: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         /* Layout */
@@ -447,24 +435,22 @@
 <body>
     <div class="settings-overlay flex center" id="overlay">
         <div class="settings-popup">
-            <h1>Instellingen</h1>
-            <label>E-mail wijzigen</label>
+            <h1 data-i18n="settings_title">Instellingen</h1>
+            <label data-i18n="email_label">E-mail wijzigen</label>
             <input type="email" id="emailInput" placeholder="nieuw e-mail">
-            <label>Telefoonnummer</label>
+            <label data-i18n="tel_label">Telefoonnummer</label>
             <input type="text" id="telInput" placeholder="nieuw nummer">
             <div class="darkmode-row flex center">
-                <span>Darkmode</span>
+                <span data-i18n="darkmode">Darkmode</span>
                 <input type="checkbox" id="darkToggle">
             </div>
-            <button id="saveBtn">Opslaan</button>
-            <button id="closeBtn">Annuleren</button>
+            <button id="saveBtn" class="btn-primary" data-i18n="save">Opslaan</button>
+            <button id="closeBtn" class="btn-secondary" data-i18n="cancel">Annuleren</button>
         </div>
     </div>
 
     <header class="header flex center">
-        <div class="logo-container">
-            <img src="Logo_rijksoverheid.svg.png" alt="Rijksoverheid Logo" class="logo">
-        </div>
+        <img src="Logo_rijksoverheid.svg.png" alt="Rijksoverheid Logo" class="logo">
         <div class="header-text">
             <h1>Rijksoverheid</h1>
             <p>Ministerie van Justitie en Veiligheid</p>
@@ -474,18 +460,23 @@
     <nav class="navbar flex">
         <div class="nav-left flex center">
             <div class="home-icon pointer">🏠</div>
-            <a href="functies.html" class="nav-item">Alle functies binnen Rijksoverheid</a>
-            <div class="nav-item">Rol: gebruiker</div>
+            <a href="functies.html" class="nav-item" data-i18n="all_roles">Alle functies binnen Rijksoverheid</a>
+            <div class="nav-item" data-i18n="role_user">Rol: gebruiker</div>
         </div>
         <div class="nav-right flex center">
-            <div class="nav-right-item pointer" id="openBtn">Instellingen ⚙️</div>
-            <div class="nav-right-item pointer">NL</div>
+            <div class="nav-right-item pointer" id="openBtn" data-i18n="settings">Instellingen ⚙️</div>
+            <div class="nav-right-item pointer">
+                <select id="langSelect" aria-label="Taalkeuze">
+                    <option value="nl">NL</option>
+                    <option value="en">EN</option>
+                    <option value="de">DE</option>
+                </select>
+            </div>
             <div class="nav-right-item flex center pointer" onclick="location.href='login.html'">
-                Inloggen <div class="user-icon flex center" style="margin-left: 8px">👤</div>
+                <span data-i18n="login">Inloggen</span> <div class="user-icon flex center" style="margin-left: 8px">👤</div>
             </div>
         </div>
     </nav>
-    <script src="auth.js"></script>
 
     <main class="main-container flex">
         <aside class="left-sidebar flex flex-col">
@@ -493,7 +484,7 @@
                 <div class="flex center" style="justify-content: flex-start; margin-bottom: 20px;">
                     <div class="avatar flex center">👤</div>
                     <div>
-                        <h2 style="font-size: 18px; font-weight: 700;">Ferdin Sverre</h2>
+                        <h2 style="font-size: 18px; font-weight: 700;">Team | Klik & Klaar</h2>
                         <p style="font-size: 12px; opacity: 0.95; letter-spacing: 0.5px;">SOFTWARE DEVELOPER</p>
                     </div>
                 </div>
@@ -507,8 +498,7 @@
                 </div>
             </div>
             <div class="info-box">
-                Op deze website vind u alles over de functies binnen het Centraal justitieel incassobureau en hoe u hier
-                in kan door groeien.
+                <div data-i18n="info">Op deze website vind u alles over de functies binnen het Centraal justitieel incassobureau en hoe u hier in kan door groeien.</div>
             </div>
         </aside>
 
@@ -519,11 +509,10 @@
 
         <aside class="right-sidebar flex flex-col">
             <div class="menu-items flex flex-col">
-                <button class="menu-button">jouw vervolg stap</button>
-                <button class="menu-button" onclick="location.href='routeplanner.html'">routeplanner</button>
-                <button class="menu-button">opgeslagen functies</button>
-                <button class="menu-button"
-                    onclick="window.open('https://www.cjib.nl/over-ons/wat-is-het-cjib', '_blank')">Over ons</button>
+                <button class="menu-button" data-i18n="menu1">jouw vervolg stap</button>
+                <button class="menu-button" onclick="location.href='routeplanner.html'" data-i18n="menu2">routeplanner</button>
+                <button class="menu-button" data-i18n="menu3">opgeslagen functies</button>
+                <button class="menu-button" onclick="window.open('https://www.cjib.nl/over-ons/wat-is-het-cjib', '_blank')" data-i18n="about">Over ons</button>
             </div>
 
             <div class="illustration flex center">
@@ -559,17 +548,17 @@
                 </div>
             </div>
             <div class="footer-section flex flex-col">
-                <h3>Contact</h3>
+                <h3 data-i18n="footer_contact">Contact</h3>
                 <p>📞 <a href="tel:0888256256">088 - 825 62 56</a></p>
                 <p>📧 <a href="mailto:info@cjib.nl">info@rijksoverheid.nl</a></p>
             </div>
             <div class="footer-section flex flex-col">
-                <h3>Bezoekadres</h3>
+                <h3 data-i18n="footer_visit">Bezoekadres</h3>
                 <p>📍 Postbus 2772</p>
                 <p>3500 GT Leeuwarden</p>
             </div>
             <div class="footer-section flex flex-col">
-                <h3>Openingstijden</h3>
+                <h3 data-i18n="footer_open">Openingstijden</h3>
                 <p>🕐 Ma-Vr: 08:00 - 17:00</p>
                 <p>Weekend: Gesloten</p>
             </div>
@@ -582,8 +571,30 @@
             open: $('openBtn'), close: $('closeBtn'), save: $('saveBtn'),
             overlay: $('overlay'), dark: $('darkToggle'),
             emailIn: $('emailInput'), telIn: $('telInput'),
-            dispEmail: $('dispEmail'), dispTel: $('dispTel')
+            dispEmail: $('dispEmail'), dispTel: $('dispTel'),
+            lang: $('langSelect')
         };
+
+        const tr = {
+            nl: { all_roles: 'Alle functies binnen Rijksoverheid', role_user: 'Rol: gebruiker', settings: 'Instellingen ⚙️', settings_title: 'Instellingen', email_label: 'E-mail wijzigen', tel_label: 'Telefoonnummer', darkmode: 'Darkmode', save: 'Opslaan', cancel: 'Annuleren', login: 'Inloggen', info: 'Op deze website vind u alles over de functies binnen het Centraal justitieel incassobureau en hoe u hier in kan door groeien.', menu1: 'jouw vervolg stap', menu2: 'routeplanner', menu3: 'opgeslagen functies', about: 'Over ons', footer_contact: 'Contact', footer_visit: 'Bezoekadres', footer_open: 'Openingstijden', saved_notice: 'Instellingen opgeslagen!' },
+            en: { all_roles: 'All roles within Government', role_user: 'Role: user', settings: 'Settings ⚙️', settings_title: 'Settings', email_label: 'Change e-mail', tel_label: 'Phone number', darkmode: 'Darkmode', save: 'Save', cancel: 'Cancel', login: 'Login', info: 'On this website you find everything about roles within the Central Judicial Collection Agency and how you can grow here.', menu1: 'your next step', menu2: 'route planner', menu3: 'saved roles', about: 'About us', footer_contact: 'Contact', footer_visit: 'Address', footer_open: 'Opening hours', saved_notice: 'Settings saved!' },
+            de: { all_roles: 'Alle Funktionen innerhalb der Regierung', role_user: 'Rolle: Benutzer', settings: 'Einstellungen ⚙️', settings_title: 'Einstellungen', email_label: 'E-Mail ändern', tel_label: 'Telefonnummer', darkmode: 'Dunkelmodus', save: 'Speichern', cancel: 'Abbrechen', login: 'Anmelden', info: 'Auf dieser Website finden Sie alles über Funktionen innerhalb der zentralen Justizvollstreckungsbehörde und wie Sie sich weiterentwickeln können.', menu1: 'Ihr nächster Schritt', menu2: 'Routenplaner', menu3: 'gespeicherte Funktionen', about: 'Über uns', footer_contact: 'Kontakt', footer_visit: 'Adresse', footer_open: 'Öffnungszeiten', saved_notice: 'Einstellungen gespeichert!' }
+        };
+
+        function applyLang(l) {
+            const m = tr[l] || tr.nl;
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const k = el.dataset.i18n;
+                if (el.tagName === 'INPUT') el.placeholder = m[k] || el.placeholder;
+                else el.textContent = m[k] || el.textContent;
+            });
+            localStorage.setItem('lang', l);
+        }
+
+        const savedLang = localStorage.getItem('lang') || (navigator.language && (navigator.language.startsWith('de') ? 'de' : (navigator.language.startsWith('en') ? 'en' : 'nl')));
+        if (els.lang) els.lang.value = savedLang;
+        applyLang(savedLang);
+        els.lang?.addEventListener('change', e => applyLang(e.target.value));
 
         const updateDisp = () => {
             els.dispEmail.textContent = localStorage.getItem('user_email') || els.dispEmail.textContent;
@@ -592,7 +603,7 @@
 
         if (localStorage.getItem('darkmode') === 'enabled') {
             document.body.classList.add('dark');
-            els.dark.checked = true;
+            if (els.dark) els.dark.checked = true;
         }
 
         updateDisp();
@@ -602,17 +613,15 @@
             els.emailIn.value = els.dispEmail.textContent;
             els.telIn.value = els.dispTel.textContent;
         };
-
         els.close.onclick = () => els.overlay.style.display = 'none';
-
         els.save.onclick = () => {
             if (els.emailIn.value.trim()) localStorage.setItem('user_email', els.emailIn.value.trim());
             if (els.telIn.value.trim()) localStorage.setItem('user_tel', els.telIn.value.trim());
             updateDisp();
             els.overlay.style.display = 'none';
-            alert('Instellingen opgeslagen!');
+            const lang = localStorage.getItem('lang') || savedLang;
+            alert(tr[lang].saved_notice || 'Saved!');
         };
-
         els.dark.onchange = () => {
             const isDark = els.dark.checked;
             document.body.classList.toggle('dark', isDark);
