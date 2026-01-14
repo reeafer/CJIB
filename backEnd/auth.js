@@ -45,10 +45,22 @@ const Auth = {
         const roleDisplay = document.getElementById('userRoleDisplay');
         if (roleDisplay) {
             if (role) {
-                const displayRole = (role.toLowerCase() === 'administrator' || role.toLowerCase() === 'admin') ? 'admin' : 'gebruiker';
-                roleDisplay.textContent = 'Rol: ' + displayRole;
+                const isAdmin = (role.toLowerCase() === 'administrator' || role.toLowerCase() === 'admin');
+                roleDisplay.setAttribute('data-i18n', isAdmin ? 'role_admin' : 'role_user');
             } else {
-                roleDisplay.textContent = 'Rol: Gast';
+                roleDisplay.setAttribute('data-i18n', 'role_guest');
+            }
+            // Trigger translation if global applyLang exists
+            if (typeof applyLang === 'function') {
+                applyLang(localStorage.getItem('lang') || 'nl');
+            } else {
+                // Fallback for pages without the new system yet
+                if (role) {
+                    const displayRole = (role.toLowerCase() === 'administrator' || role.toLowerCase() === 'admin') ? 'admin' : 'gebruiker';
+                    roleDisplay.textContent = 'Rol: ' + displayRole;
+                } else {
+                    roleDisplay.textContent = 'Rol: Gast';
+                }
             }
         }
 
