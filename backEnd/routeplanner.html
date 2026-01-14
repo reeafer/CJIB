@@ -6,6 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Routeplanner - Rijksoverheid</title>
     <style>
+        :root {
+            --primary: #582f71;
+            --primary-dark: #3b1c4d;
+            --secondary: #c6b8cf;
+            --bg: white;
+            --text: #1a1a1a;
+            --text-muted: #666;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --sidebar-grad: linear-gradient(180deg, #582f71 0%, #4a2660 40%, #3b1c4d 100%);
+            --btn-bg: #8b7ba8;
+            --btn-hover: #9d8dba;
+            --trans: 0.3s ease;
+        }
+
+        body.dark {
+            --bg: #0a0a0a;
+            --text: #e0e0e0;
+            --text-muted: #b0b0b0;
+            --shadow: 0 2px 8px rgba(255, 255, 255, 0.05);
+            --sidebar-grad: linear-gradient(180deg, #1a0f24 0%, #120a1a 40%, #0a0510 100%);
+            --btn-bg: #2d1f3a;
+            --btn-hover: #3d2f4a;
+            --secondary: #2d2d2d;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,271 +38,281 @@
         }
 
         body {
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            transition: background var(--trans), color var(--trans);
+            overflow-x: hidden;
         }
 
-        /* Header & Navbar - simpel */
-        .header {
-            background: white;
-            padding: 20px 50px;
+        /* Utils */
+        .flex {
             display: flex;
-            gap: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .flex-col {
+            flex-direction: column;
+        }
+
+        .center {
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pointer {
+            cursor: pointer;
+        }
+
+        .header {
+            background: var(--bg);
+            padding: 18px 40px;
+            box-shadow: var(--shadow);
+            z-index: 10;
+        }
+
+        .logo-container {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-right: 20px;
         }
 
         .logo {
-            width: 80px;
-            height: 80px;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
         }
 
         .header-text h1 {
             font-size: 19px;
+            font-weight: 600;
         }
 
         .header-text p {
             font-size: 13px;
-            color: #666;
+            color: var(--text-muted);
             font-style: italic;
         }
 
         .navbar {
-            background: #c6b8cf;
-            display: flex;
+            background: var(--secondary);
             justify-content: space-between;
-            padding: 0;
-        }
-
-        .nav-left,
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 20px;
+            font-size: 14px;
         }
 
         .nav-item {
-            padding: 12px 24px;
+            padding: 12px 22px;
+            transition: var(--trans);
+            text-decoration: none;
+            color: inherit;
             cursor: pointer;
+        }
+
+        .nav-item:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        body.dark .nav-item:hover {
+            background: rgba(255, 255, 255, 0.05);
         }
 
         .home-icon {
             font-size: 28px;
-            padding: 8px 24px;
-            cursor: pointer;
+            padding: 8px 22px;
         }
 
         .nav-right {
+            gap: 30px;
             padding-right: 30px;
         }
 
-        /* Main layout */
-        .main {
+        .user-icon {
+            width: 26px;
+            height: 26px;
+            background: var(--text);
+            color: var(--bg);
+            border-radius: 50%;
+            font-size: 14px;
             display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .main {
             height: calc(100vh - 130px);
         }
 
-        /* Sidebar */
         .sidebar {
-            width: 360px;
-            background: white;
-            border-right: 1px solid #ddd;
+            width: 350px;
+            background: var(--bg);
+            border-right: 1px solid var(--secondary);
         }
 
         .sidebar-header {
             padding: 20px;
-            background: #d4c5dc;
-            font-size: 18px;
+            border-bottom: 1px solid var(--secondary);
+            background: rgba(0, 0, 0, 0.02);
+            color: var(--text-muted);
+            font-size: 14px;
             font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .function-item {
             padding: 18px 20px;
-            background: #582f71;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid var(--secondary);
             cursor: pointer;
+            transition: var(--trans);
+            background: var(--bg);
+            color: var(--text);
+            justify-content: space-between;
         }
 
         .function-item:hover {
-            background: #6d3a8a;
+            background: rgba(0, 0, 0, 0.02);
         }
 
-        /* Content */
+        .function-item.active_item {
+            background: var(--primary);
+            color: white;
+        }
+
         .content {
             flex: 1;
-            background: url('achtergrond.png') center/cover;
+            background: rgba(0, 0, 0, 0.05);
             position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            overflow: hidden;
         }
 
-        .content::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: rgba(255, 255, 255, 0.7);
+        body.dark .content {
+            background: #121212;
         }
 
-        /* Flowchart */
         .flowchart {
             position: relative;
             z-index: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
+            gap: 20px;
         }
 
         .box {
-            background: #d4c5dc;
-            padding: 12px 30px;
-            border-radius: 6px;
-            font-size: 16px;
+            background: var(--primary);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-size: 15px;
             font-weight: 700;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--trans);
+            text-align: center;
+            min-width: 180px;
         }
 
         .arrow {
-            width: 3px;
-            height: 40px;
-            background: #333;
+            width: 2px;
+            height: 35px;
+            background: var(--primary);
+            opacity: 0.3;
             position: relative;
         }
 
         .arrow::after {
             content: '';
             position: absolute;
-            bottom: -8px;
-            left: -5px;
-            border: 8px solid transparent;
-            border-top: 12px solid #333;
+            bottom: -5px;
+            left: -4px;
+            border: 5px solid transparent;
+            border-top: 8px solid var(--primary);
         }
 
         .split {
-            display: flex;
-            gap: 40px;
+            gap: 60px;
         }
 
-        /* Instellingen Popup */
+        /* Popup */
         .settings-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.8);
             display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
+            z-index: 1000;
+            backdrop-filter: blur(4px);
         }
 
         .settings-popup {
-            width: 720px;
+            width: 600px;
             max-width: 90%;
-            background: #5b2d6f;
-            color: white;
-            padding: 50px;
-            border-radius: 10px;
+            background: var(--bg);
+            color: var(--text);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
         }
 
         .settings-popup h1 {
-            font-size: 42px;
-            margin-bottom: 30px;
+            font-size: 28px;
+            color: var(--primary);
+            margin-bottom: 25px;
         }
 
         .settings-popup label {
             display: block;
-            margin-top: 20px;
-            margin-bottom: 6px;
+            margin: 20px 0 8px;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
         }
 
-        .settings-popup input[type="email"],
-        .settings-popup input[type="text"] {
+        .settings-popup input[type="text"],
+        .settings-popup input[type="email"] {
             width: 100%;
             padding: 12px;
-            border-radius: 4px;
-            border: none;
+            border: 1px solid var(--secondary);
+            background: var(--bg);
+            color: var(--text);
+            border-radius: 6px;
         }
 
         .darkmode-row {
-            margin-top: 30px;
-            display: flex;
+            margin: 30px 0;
             justify-content: space-between;
-            align-items: center;
         }
 
         .settings-popup button {
-            margin-top: 20px;
-            margin-right: 10px;
-            padding: 10px 20px;
-            background: #d1c4d9;
+            padding: 12px 25px;
             border: none;
+            border-radius: 6px;
+            font-weight: 700;
             cursor: pointer;
-            border-radius: 4px;
+            transition: var(--trans);
         }
 
-        /* Dark Mode */
-        body.dark {
-            background: #0a0a0a;
+        #saveSettings {
+            background: var(--primary);
+            color: white;
+            margin-right: 15px;
         }
 
-        body.dark .header {
-            background: #1a1a1a;
-        }
-
-        body.dark .header-text h1 {
-            color: #e0e0e0;
-        }
-
-        body.dark .header-text p {
-            color: #b0b0b0;
-        }
-
-        body.dark .navbar {
-            background: #2d2d2d;
-        }
-
-        body.dark .nav-item {
-            color: #e0e0e0;
-        }
-
-        body.dark .sidebar {
-            background: #1a1a1a;
-        }
-
-        body.dark .sidebar-header {
-            background: #2d2d2d;
-            color: #e0e0e0;
-        }
-
-        body.dark .function-item {
-            background: #2d1f3a;
-        }
-
-        body.dark .function-item:hover {
-            background: #3d2f4a;
-        }
-
-        body.dark .content::before {
-            background: rgba(0, 0, 0, 0.5);
-        }
-
-        body.dark .box {
-            background: #3d2f4a;
-            color: #e0e0e0;
+        #closeSettings {
+            background: var(--secondary);
+            color: var(--text);
         }
     </style>
 </head>
 
 <body>
     <!-- INSTELLINGEN POPUP -->
-    <div class="settings-overlay" id="settingsOverlay">
+    <div class="settings-overlay flex center" id="settingsOverlay">
         <div class="settings-popup">
             <h1>Instellingen</h1>
             <label>E-mail wijzigen</label>
             <input type="email" id="emailInput" placeholder="nieuw e-mail">
             <label>Telefoonnummer</label>
             <input type="text" id="telInput" placeholder="nieuw nummer">
-            <div class="darkmode-row">
+            <div class="darkmode-row flex center">
                 <span>Darkmode</span>
                 <input type="checkbox" id="darkToggle">
             </div>
@@ -286,58 +321,61 @@
         </div>
     </div>
 
-    <div class="header">
-        <img src="Logo_rijksoverheid.svg.png" class="logo">
+    <header class="header flex center" style="justify-content: flex-start;">
+        <div class="logo-container">
+            <img src="Logo_rijksoverheid.svg.png" alt="Rijksoverheid Logo" class="logo">
+        </div>
         <div class="header-text">
             <h1>Rijksoverheid</h1>
             <p>Ministerie van Justitie en Veiligheid</p>
         </div>
-    </div>
+    </header>
 
-    <div class="navbar">
-        <div class="nav-left">
-            <a href="index.html" style="text-decoration: none; color: inherit;">
-                <div class="home-icon">🏠</div>
-            </a>
-            <div class="nav-item" onclick="window.open('https://www.cjib.nl/over-ons/wat-is-het-cjib', '_blank')"
-                style="cursor: pointer;">over ons</div>
-            <div class="nav-item" onclick="window.location.href='functies.html'" style="cursor: pointer;">alle functies
-            </div>
+    <nav class="navbar flex">
+        <div class="nav-left flex center">
+            <a href="index.html" class="home-icon pointer" style="text-decoration: none;">🏠</a>
+            <div class="nav-item">over ons</div>
+            <a href="functies.html" class="nav-item">alle functies</a>
             <div class="nav-item" id="userRoleDisplay">Rol: Gast</div>
         </div>
-        <div class="nav-right">
+        <div class="nav-right flex center">
             <div class="nav-item" id="openSettings">instellingen ⚙️</div>
             <div class="nav-item">🇳🇱 NL</div>
-            <div class="nav-item" id="loginLink" style="cursor: pointer;">Inloggen</div>
+            <div class="nav-item" id="loginLink">Inloggen</div>
         </div>
-    </div>
+    </nav>
     <script src="auth.js"></script>
 
-    <div class="main">
-        <div class="sidebar">
+    <main class="main flex">
+        <aside class="sidebar flex flex-col">
             <div class="sidebar-header">OPGESLAGEN FUNCTIES</div>
-            <div id="dynamicFunctionList">
+            <div id="dynamicFunctionList" class="flex-col" style="overflow-y: auto; flex: 1;">
                 <!-- Wordt gevuld via JS -->
             </div>
-        </div>
+        </aside>
 
-        <div class="content">
-            <div class="flowchart">
-                <div class="box" id="flowchartTitle" style="font-size: 20px; padding: 15px 40px;">SELECTEER EEN FUNCTIE
+        <section class="content flex center">
+            <div class="flowchart flex flex-col center">
+                <div class="box" id="flowchartTitle" style="font-size: 18px; padding: 18px 45px; margin-bottom: 30px;">
+                    SELECTEER EEN FUNCTIE</div>
+                <div class="box" style="background: var(--secondary); color: var(--text); opacity: 0.8;">START</div>
+                <div class="arrow"></div>
+                <div class="box" data-type="opleiding">OPLEIDING</div>
+                <div class="arrow"></div>
+                <div class="split flex center">
+                    <div class="flex flex-col center">
+                        <div class="box" data-type="functie">VORIGE ERVARING</div>
+                    </div>
+                    <div class="flex flex-col center">
+                        <div class="box" data-type="cursus">CURSUS</div>
+                    </div>
                 </div>
-                <div class="box">START</div>
                 <div class="arrow"></div>
-                <div class="box">OPLEIDING</div>
-                <div class="arrow"></div>
-                <div class="split">
-                    <div class="box">FUNCTIE</div>
-                    <div class="box">CURSUS</div>
-                </div>
-                <div class="arrow"></div>
-                <div class="box">EIND DOEL</div>
+                <div class="box" data-type="einddoel"
+                    style="border: 3px solid var(--secondary); background: var(--primary-dark)">EIND DOEL</div>
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
 
     <script>
         // Load functions from localStorage (same key as functies.html)
@@ -354,16 +392,46 @@
                 div.className = 'function-item';
                 div.innerHTML = `<span>${f.titel}</span><span>→</span>`;
                 div.onclick = () => {
-                    flowTitle.textContent = f.titel.toUpperCase();
-                    // Highlight active
-                    document.querySelectorAll('.function-item').forEach(el => el.style.background = '');
-                    // Note: inline style override might be needed if CSS uses !important or specific selectors, 
-                    // but usually class toggling is better. For now keeping it simple.
-                    // Let's use a class logic if possible, but the original CSS had hover effects.
-                    // Re-applying base style or class would be better.
-                    // Let's just update the text for now as requested.
+                    updateFlowchart(f);
+                    // Highlight active in sidebar
+                    document.querySelectorAll('.function-item').forEach(el => el.classList.remove('active_item'));
+                    div.classList.add('active_item');
                 };
                 listContainer.appendChild(div);
+            });
+        }
+
+        function updateFlowchart(f) {
+            flowTitle.textContent = f.titel.toUpperCase();
+            const boxes = document.querySelectorAll('.box');
+
+            boxes.forEach(box => {
+                const text = box.textContent.trim().toUpperCase();
+
+                // Education box
+                if (text === 'OPLEIDING' || box.getAttribute('data-type') === 'opleiding') {
+                    box.textContent = f.opleiding || 'OPLEIDING';
+                    box.setAttribute('data-type', 'opleiding');
+                    box.style.background = '#8b7ba8';
+                }
+                // Function box (Links - Vorige functie)
+                else if (text === 'FUNCTIE' || box.getAttribute('data-type') === 'functie') {
+                    box.textContent = (f.vervolg_functie || 'VORIGE FUNCTIE').toUpperCase();
+                    box.setAttribute('data-type', 'functie');
+                    box.style.background = '#8b7ba8';
+                }
+                // Course box (Rechts)
+                else if (text === 'CURSUS' || box.getAttribute('data-type') === 'cursus') {
+                    box.textContent = (f.cursus || 'CURSUS').toUpperCase();
+                    box.setAttribute('data-type', 'cursus');
+                    box.style.background = '#8b7ba8';
+                }
+                // End goal box (Onderaan)
+                else if (text === 'EIND DOEL' || box.getAttribute('data-type') === 'einddoel') {
+                    box.textContent = (f.titel || 'EIND DOEL').toUpperCase();
+                    box.setAttribute('data-type', 'einddoel');
+                    box.style.background = '#8b7ba8';
+                }
             });
         }
 
@@ -372,29 +440,12 @@
             const selectionRaw = localStorage.getItem('routeplanner_selection');
             if (selectionRaw) {
                 const selection = JSON.parse(selectionRaw);
-                const boxes = document.querySelectorAll('.box');
-
-                if (selection.type === 'functie') {
+                if (selection.type === 'full') {
+                    updateFlowchart(selection.data);
+                } else if (selection.type === 'functie' || selection.type === 'cursus') {
+                    // Legacy support for old selection format if needed
                     flowTitle.textContent = selection.value.toUpperCase();
-                    // Update the FUNCTIE box (it's the first one in the split)
-                    boxes.forEach(box => {
-                        if (box.textContent === 'FUNCTIE') {
-                            box.textContent = selection.value.toUpperCase();
-                            box.style.background = '#8b7ba8'; // Highlight it
-                        }
-                    });
-                } else if (selection.type === 'cursus') {
-                    // Update the CURSUS box
-                    boxes.forEach(box => {
-                        if (box.textContent === 'CURSUS') {
-                            box.textContent = selection.value.toUpperCase();
-                            box.style.background = '#8b7ba8'; // Highlight it
-                        }
-                    });
                 }
-
-                // Clear selection so it doesn't persist on refresh
-                localStorage.removeItem('routeplanner_selection');
             }
         };
 
