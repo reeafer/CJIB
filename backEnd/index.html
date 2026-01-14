@@ -493,6 +493,14 @@
         </div>
         <div class="nav-right flex center">
             <div class="nav-right-item pointer" id="openBtn" data-i18n="settings">Instellingen ⚙️</div>
+            <div class="nav-right-item pointer">
+                <select id="langSelect" aria-label="Taalkeuze"
+                    style="background: transparent; border: 1px solid rgba(255,255,255,0.2); color: inherit; padding: 2px 5px; border-radius: 4px;">
+                    <option value="nl">NL</option>
+                    <option value="en">EN</option>
+                    <option value="de">DE</option>
+                </select>
+            </div>
             <div class="nav-right-item flex center pointer" id="loginLink">
                 <span data-i18n="login">Inloggen</span>
                 <div class="user-icon flex center" style="margin-left: 8px">👤</div>
@@ -527,7 +535,7 @@
         </aside>
 
         <section class="center-image">
-            <img src="IMG-20211120-WA0005-1-e1637413059202.jpg" alt="Team collaboration">
+            <img src="St8nq_yzl0mWGuqRJxhooQ==.im140516iv002-afsluitdijk_3295.jpeg" alt="Team collaboration">
         </section>
 
         <aside class="right-sidebar flex flex-col">
@@ -579,8 +587,30 @@
             open: $('openBtn'), close: $('closeBtn'), save: $('saveBtn'),
             overlay: $('overlay'), dark: $('darkToggle'),
             emailIn: $('emailInput'), telIn: $('telInput'),
-            dispEmail: $('dispEmail'), dispTel: $('dispTel')
+            dispEmail: $('dispEmail'), dispTel: $('dispTel'),
+            lang: $('langSelect')
         };
+
+        const tr = {
+            nl: { all_roles: 'Alle functies binnen Rijksoverheid', role_user: 'Rol: gebruiker', settings: 'Instellingen ⚙️', settings_title: 'Instellingen', email_label: 'E-mail wijzigen', tel_label: 'Telefoonnummer', darkmode: 'Darkmode', save: 'Opslaan', cancel: 'Annuleren', login: 'Inloggen', logout: 'Uitloggen', info: 'Op deze website vind u alles over de functies binnen het Centraal justitieel incassobureau en hoe u hier in kan door groeien.', menu1: 'jouw vervolg stap', menu2: 'routeplanner', menu3: 'opgeslagen functies', about: 'Over ons', footer_contact: 'Contact', footer_visit: 'Bezoekadres', footer_open: 'Openingstijden', saved_notice: 'Instellingen opgeslagen!' },
+            en: { all_roles: 'All roles within Government', role_user: 'Role: user', settings: 'Settings ⚙️', settings_title: 'Settings', email_label: 'Change e-mail', tel_label: 'Phone number', darkmode: 'Darkmode', save: 'Save', cancel: 'Cancel', login: 'Login', logout: 'Logout', info: 'On this website you find everything about roles within the Central Judicial Collection Agency and how you can grow here.', menu1: 'your next step', menu2: 'route planner', menu3: 'saved roles', about: 'About us', footer_contact: 'Contact', footer_visit: 'Address', footer_open: 'Opening hours', saved_notice: 'Settings saved!' },
+            de: { all_roles: 'Alle Funktionen innerhalb der Regierung', role_user: 'Rolle: Benutzer', settings: 'Einstellungen ⚙️', settings_title: 'Einstellungen', email_label: 'E-Mail ändern', tel_label: 'Telefonnummer', darkmode: 'Dunkelmodus', save: 'Speichern', cancel: 'Abbrechen', login: 'Anmelden', logout: 'Abmelden', info: 'Auf dieser Website finden Sie alles über Funktionen innerhalb der zentralen Justizvollstreckungsbehörde und wie Sie sich weiterentwickeln können.', menu1: 'Ihr nächster Schritt', menu2: 'Routenplaner', menu3: 'gespeicherte Funktionen', about: 'Über ons', footer_contact: 'Kontakt', footer_visit: 'Adresse', footer_open: 'Öffnungszeiten', saved_notice: 'Einstellungen gespeichert!' }
+        };
+
+        function applyLang(l) {
+            const m = tr[l] || tr.nl;
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const k = el.dataset.i18n;
+                if (el.tagName === 'INPUT') el.placeholder = m[k] || el.placeholder;
+                else el.textContent = m[k] || el.textContent;
+            });
+            localStorage.setItem('lang', l);
+        }
+
+        const savedLang = localStorage.getItem('lang') || (navigator.language && (navigator.language.startsWith('de') ? 'de' : (navigator.language.startsWith('en') ? 'en' : 'nl')));
+        if (els.lang) els.lang.value = savedLang;
+        applyLang(savedLang);
+        els.lang?.addEventListener('change', e => applyLang(e.target.value));
 
         const updateDisp = () => {
             els.dispEmail.textContent = localStorage.getItem('user_email') || els.dispEmail.textContent;
@@ -605,7 +635,8 @@
             if (els.telIn.value.trim()) localStorage.setItem('user_tel', els.telIn.value.trim());
             updateDisp();
             els.overlay.style.display = 'none';
-            alert('Instellingen opgeslagen!');
+            const lang = localStorage.getItem('lang') || savedLang;
+            alert(tr[lang].saved_notice || 'Saved!');
         };
         els.dark.onchange = () => {
             const isDark = els.dark.checked;
