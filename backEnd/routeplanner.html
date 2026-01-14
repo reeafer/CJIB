@@ -162,6 +162,45 @@
             letter-spacing: 1px;
         }
 
+        .filter-section {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--secondary);
+            display: flex;
+            gap: 10px;
+            background: #fdfdfd;
+        }
+
+        body.dark .filter-section {
+            background: #1a1a1a;
+        }
+
+        .filter-btn {
+            padding: 6px 15px;
+            border: 1px solid var(--secondary);
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            background: white;
+            color: var(--text);
+            transition: var(--trans);
+        }
+
+        body.dark .filter-btn {
+            background: #2d2d2d;
+        }
+
+        .filter-btn:hover {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
         .function-item {
             padding: 18px 20px;
             border-bottom: 1px solid var(--secondary);
@@ -349,6 +388,12 @@
     <main class="main flex">
         <aside class="sidebar flex flex-col">
             <div class="sidebar-header">OPGESLAGEN FUNCTIES</div>
+            <div class="filter-section">
+                <button class="filter-btn active" data-filter="ALL">Alles</button>
+                <button class="filter-btn" data-filter="MBO">MBO</button>
+                <button class="filter-btn" data-filter="HBO">HBO</button>
+                <button class="filter-btn" data-filter="WO">WO</button>
+            </div>
             <div id="dynamicFunctionList" class="flex-col" style="overflow-y: auto; flex: 1;">
                 <!-- Wordt gevuld via JS -->
             </div>
@@ -378,18 +423,28 @@
     </main>
 
     <script>
-        // Load functions from localStorage (same key as functies.html)
         const savedFuncties = JSON.parse(localStorage.getItem('cjib_functies')) || {};
         const listContainer = document.getElementById('dynamicFunctionList');
         const flowTitle = document.getElementById('flowchartTitle');
+        let currentEducationFilter = 'ALL';
 
-        if (Object.keys(savedFuncties).length === 0) {
-            listContainer.innerHTML = '<div style="padding:20px; color:#666;">Geen functies gevonden.</div>';
-        } else {
-            Object.keys(savedFuncties).forEach(id => {
+        function renderFunctionList() {
+            listContainer.innerHTML = '';
+            const filteredIds = Object.keys(savedFuncties).filter(id => {
+                if (currentEducationFilter === 'ALL') return true;
+                const education = savedFuncties[id].opleiding || '';
+                return education.trim().toUpperCase() === currentEducationFilter;
+            });
+
+            if (filteredIds.length === 0) {
+                listContainer.innerHTML = '<div style="padding:20px; color:#666;">Geen functies gevonden voor dit niveau.</div>';
+                return;
+            }
+
+            filteredIds.forEach(id => {
                 const f = savedFuncties[id];
                 const div = document.createElement('div');
-                div.className = 'function-item';
+                div.className = 'function-item flex center';
                 div.innerHTML = `<span>${f.titel}</span><span>→</span>`;
                 div.onclick = () => {
                     updateFlowchart(f);
@@ -400,6 +455,19 @@
                 listContainer.appendChild(div);
             });
         }
+
+        // Filter button click logic
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.onclick = () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentEducationFilter = btn.getAttribute('data-filter');
+                renderFunctionList();
+            };
+        });
+
+        // Initialize list
+        renderFunctionList();
 
         function updateFlowchart(f) {
             flowTitle.textContent = f.titel.toUpperCase();
