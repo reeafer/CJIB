@@ -70,26 +70,42 @@
         .header {
             background: var(--bg);
             padding: 18px 40px;
-            gap: 15px;
+            gap: 20px;
             box-shadow: var(--shadow);
             z-index: 10;
+            display: flex;
+            align-items: center;
         }
 
         .logo {
             width: 80px;
             height: 80px;
+
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .logo {
+            max-width: 100%;
+            max-height: 100%;
+
             object-fit: contain;
         }
 
         .header-text h1 {
             font-size: 18px;
             font-weight: 600;
+            margin: 0;
         }
 
         .header-text p {
             font-size: 13px;
             color: var(--text-muted);
             font-style: italic;
+            margin: 2px 0 0 0;
         }
 
         /* Navbar */
@@ -97,6 +113,11 @@
             background: var(--secondary);
             justify-content: space-between;
             font-size: 14px;
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            /* matching header padding */
+            height: 50px;
         }
 
         .nav-item,
@@ -119,12 +140,16 @@
 
         .home-icon {
             font-size: 26px;
-            padding: 10px 22px;
+            padding: 0 22px;
+            display: flex;
+            align-items: center;
         }
 
         .nav-right {
             gap: 30px;
             padding-right: 30px;
+            display: flex;
+            align-items: center;
         }
 
         .user-icon {
@@ -460,6 +485,7 @@
     <nav class="navbar flex">
         <div class="nav-left flex center">
             <div class="home-icon pointer">🏠</div>
+<<<<<<< HEAD
             <a href="functies.html" class="nav-item" data-i18n="all_roles">Alle functies binnen Rijksoverheid</a>
             <div class="nav-item" data-i18n="role_user">Rol: gebruiker</div>
         </div>
@@ -474,6 +500,16 @@
             </div>
             <div class="nav-right-item flex center pointer" onclick="location.href='login.html'">
                 <span data-i18n="login">Inloggen</span> <div class="user-icon flex center" style="margin-left: 8px">👤</div>
+=======
+            <a href="functies.html" class="nav-item">Alle functies binnen Rijksoverheid</a>
+            <div class="nav-item" id="userRoleDisplay">Rol: Gast</div>
+        </div>
+        <div class="nav-right flex center">
+            <div class="nav-right-item pointer" id="openBtn">Instellingen ⚙️</div>
+            <div class="nav-right-item pointer">NL</div>
+            <div class="nav-right-item flex center pointer" id="loginLink">
+                Inloggen <div class="user-icon flex center" style="margin-left: 8px">👤</div>
+>>>>>>> 216dc3cc72512c1b4efdbc1fd2a8df153abcf6ef
             </div>
         </div>
     </nav>
@@ -515,26 +551,7 @@
                 <button class="menu-button" onclick="window.open('https://www.cjib.nl/over-ons/wat-is-het-cjib', '_blank')" data-i18n="about">Over ons</button>
             </div>
 
-            <div class="illustration flex center">
-                <div class="person person1 flex flex-col center">
-                    <div class="person-head"></div>
-                    <div class="person-body">
-                        <div class="person-arm"></div>
-                    </div>
-                </div>
-                <div class="person person2 flex flex-col center">
-                    <div class="person-head"></div>
-                    <div class="person-body">
-                        <div class="person-arm"></div>
-                    </div>
-                </div>
-                <div class="person person3 flex flex-col center">
-                    <div class="person-head"></div>
-                    <div class="person-body">
-                        <div class="person-arm"></div>
-                    </div>
-                </div>
-            </div>
+
         </aside>
     </main>
 
