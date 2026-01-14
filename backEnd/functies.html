@@ -422,6 +422,13 @@
                     <span>Opleiding</span>
                     <span class="mbo-badge" id="cardOpleiding">MBO</span>
                 </div>
+                <div class="content-section"
+                    style="border-top: 1px solid rgba(255, 255, 255, 0.2); display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button class="add-function-btn" id="planRouteFunctie"
+                        style="margin: 0; flex: 1; min-width: 150px; background: #8b7ba8;">Route: Functie</button>
+                    <button class="add-function-btn" id="planRouteCursus"
+                        style="margin: 0; flex: 1; min-width: 150px; background: #8b7ba8;">Route: Cursus</button>
+                </div>
             </div>
         </div>
     </div>
@@ -434,6 +441,10 @@
                 <div class="form-group">
                     <label>Functie titel *</label>
                     <input type="text" id="titel" required>
+                </div>
+                <div class="form-group">
+                    <label>Cursus naam *</label>
+                    <input type="text" id="cursus" required>
                 </div>
                 <div class="form-group">
                     <label>Beschrijving *</label>
@@ -463,16 +474,16 @@
     <script>
         // Data
         const defaultData = {
-            1: { titel: "Medewerker Administratie", beschrijving: "Verantwoordelijk voor het verwerken, controleren en bijhouden van administratieve en financiële gegevens binnen het CJIB.", benodigd: "MBO-diploma in administratieve richting. Basiskennis administratie, nauwkeurig werken en ervaring met computersystemen.", opleiding: "MBO" },
-            2: { titel: "Juridisch Medewerker", beschrijving: "Ondersteunt bij juridische processen zoals het controleren van dossiers en het behandelen van bezwaren.", benodigd: "HBO-diploma in juridische richting. Kennis van wet- en regelgeving en ervaring met dossierbehandeling.", opleiding: "HBO" },
-            3: { titel: "Klantenservice Medewerker", beschrijving: "Beantwoordt vragen van burgers over boetes, betalingen en procedures.", benodigd: "MBO-diploma. Goede communicatieve vaardigheden en bij voorkeur ervaring in klantenservice.", opleiding: "MBO" },
-            4: { titel: "Behandelaar Bezwaar", beschrijving: "Beoordeelt ingediende bezwaren en neemt beslissingen volgens vastgestelde regels.", benodigd: "HBO-diploma, bij voorkeur juridisch. Analytisch vermogen en ervaring met bezwaarprocedures.", opleiding: "HBO" },
-            5: { titel: "Financieel Medewerker", beschrijving: "Beheert en controleert financiële transacties en betalingen.", benodigd: "MBO-diploma in financiële of administratieve richting. Cijfermatig inzicht en ervaring met financiële administratie.", opleiding: "MBO" },
-            6: { titel: "ICT Support Medewerker", beschrijving: "Ondersteunt medewerkers bij technische problemen met systemen en software.", benodigd: "MBO-diploma ICT. Technisch inzicht en ervaring met computer- en softwaresupport.", opleiding: "MBO" },
-            7: { titel: "Data Analist", beschrijving: "Analyseert gegevens om processen en prestaties inzichtelijk te maken.", benodigd: "HBO-diploma in data, ICT of economie. Ervaring met data-analyse en rapportages.", opleiding: "HBO" },
-            8: { titel: "Teamleider", beschrijving: "Stuurt een team aan en bewaakt de kwaliteit en voortgang van het werk.", benodigd: "HBO-diploma. Leidinggevende ervaring en goede organisatorische vaardigheden.", opleiding: "HBO" },
-            9: { titel: "Communicatie Medewerker", beschrijving: "Verzorgt interne en externe communicatie van de organisatie.", benodigd: "HBO-diploma communicatie of media. Ervaring met schrijven en communicatie is gewenst.", opleiding: "HBO" },
-            10: { titel: "HR Medewerker", beschrijving: "Ondersteunt personeelszaken zoals administratie en begeleiding van medewerkers.", benodigd: "MBO-diploma HR of administratie. Ervaring met personeelsadministratie is een pré.", opleiding: "MBO" }
+            1: { titel: "Medewerker Administratie", beschrijving: "Verantwoordelijk voor het verwerken, controleren en bijhouden van administratieve en financiële gegevens binnen het CJIB.", benodigd: "MBO-diploma in administratieve richting. Basiskennis administratie, nauwkeurig werken en ervaring met computersystemen.", opleiding: "MBO", cursus: "Basisadministratie" },
+            2: { titel: "Juridisch Medewerker", beschrijving: "Ondersteunt bij juridische processen zoals het controleren van dossiers en het behandelen van bezwaren.", benodigd: "HBO-diploma in juridische richting. Kennis van wet- en regelgeving en ervaring met dossierbehandeling.", opleiding: "HBO", cursus: "Bestuursrecht Basis" },
+            3: { titel: "Klantenservice Medewerker", beschrijving: "Beantwoordt vragen van burgers over boetes, betalingen en procedures.", benodigd: "MBO-diploma. Goede communicatieve vaardigheden en bij voorkeur ervaring in klantenservice.", opleiding: "MBO", cursus: "Communicatie & Klantcontact" },
+            4: { titel: "Behandelaar Bezwaar", beschrijving: "Beoordeelt ingediende bezwaren en neemt beslissingen volgens vastgestelde regels.", benodigd: "HBO-diploma, bij voorkeur juridisch. Analytisch vermogen en ervaring met bezwaarprocedures.", opleiding: "HBO", cursus: "Bezwaarafhandeling" },
+            5: { titel: "Financieel Medewerker", beschrijving: "Beheert en controleert financiële transacties en betalingen.", benodigd: "MBO-diploma in financiële of administratieve richting. Cijfermatig inzicht en ervaring met financiële administratie.", opleiding: "MBO", cursus: "Financiële Verantwoording" },
+            6: { titel: "ICT Support Medewerker", beschrijving: "Ondersteunt medewerkers bij technische problemen met systemen en software.", benodigd: "MBO-diploma ICT. Technisch inzicht en ervaring met computer- en softwaresupport.", opleiding: "MBO", cursus: "ITIL Foundation" },
+            7: { titel: "Data Analist", beschrijving: "Analyseert gegevens om processen en prestaties inzichtelijk te maken.", benodigd: "HBO-diploma in data, ICT of economie. Ervaring met data-analyse en rapportages.", opleiding: "HBO", cursus: "SQL & Data Visualisatie" },
+            8: { titel: "Teamleider", beschrijving: "Stuurt een team aan en bewaakt de kwaliteit en voortgang van het werk.", benodigd: "HBO-diploma. Leidinggevende ervaring en goede organisatorische vaardigheden.", opleiding: "HBO", cursus: "Leidinggeven & Coaching" },
+            9: { titel: "Communicatie Medewerker", beschrijving: "Verzorgt interne en externe communicatie van de organisatie.", benodigd: "HBO-diploma communicatie of media. Ervaring met schrijven en communicatie is gewenst.", opleiding: "HBO", cursus: "Copywriting & Strategie" },
+            10: { titel: "HR Medewerker", beschrijving: "Ondersteunt personeelszaken zoals administratie en begeleiding van medewerkers.", benodigd: "MBO-diploma HR of administratie. Ervaring met personeelsadministratie is een pré.", opleiding: "MBO", cursus: "Personeelsadministratie" }
         };
 
         let functies = JSON.parse(localStorage.getItem('cjib_functies')) || { ...defaultData };
@@ -557,42 +568,96 @@
             }
         }
 
+        let currentSelectedId = null;
+
         function show(id) {
+            currentSelectedId = id;
             document.getElementById('cardTitle').textContent = functies[id].titel;
             document.getElementById('cardDesc').textContent = functies[id].beschrijving;
             document.getElementById('cardBenodigd').textContent = functies[id].benodigd;
             document.getElementById('cardOpleiding').textContent = functies[id].opleiding;
         }
 
+        function planRoute(type) {
+            if (!currentSelectedId || !functies[currentSelectedId]) return;
+
+            const selection = {
+                type: type,
+                value: type === 'functie' ? functies[currentSelectedId].titel : (functies[currentSelectedId].cursus || "Geen cursus beschikbaar")
+            };
+
+            localStorage.setItem('routeplanner_selection', JSON.stringify(selection));
+            window.location.href = 'routeplanner.html';
+        }
+
+        document.getElementById('planRouteFunctie').onclick = () => planRoute('functie');
+        document.getElementById('planRouteCursus').onclick = () => planRoute('cursus');
+
         render();
         if (Object.keys(functies).length > 0) {
             document.querySelector('.function-item').click();
         }
 
-        // Popup
+        let editingId = null;
+
         document.getElementById('addBtn').onclick = function () {
+            editingId = null;
+            document.querySelector('#popup h2').textContent = 'Nieuwe functie aanmaken';
+            document.getElementById('form').reset();
             document.getElementById('popup').classList.add('active');
         };
+
+        function editFunctie(id, event) {
+            event.stopPropagation();
+            editingId = id;
+            const f = functies[id];
+
+            document.querySelector('#popup h2').textContent = 'Functie bewerken';
+            document.getElementById('titel').value = f.titel;
+            document.getElementById('cursus').value = f.cursus || '';
+            document.getElementById('beschrijving').value = f.beschrijving;
+            document.getElementById('benodigd').value = f.benodigd;
+            document.getElementById('opleiding').value = f.opleiding;
+
+            document.getElementById('popup').classList.add('active');
+        }
 
         document.getElementById('cancelBtn').onclick = function () {
             document.getElementById('popup').classList.remove('active');
             document.getElementById('form').reset();
+            editingId = null;
         };
 
         document.getElementById('form').onsubmit = function (e) {
             e.preventDefault();
-            const newId = Math.max(...Object.keys(functies).map(Number)) + 1;
-            functies[newId] = {
+
+            const data = {
                 titel: document.getElementById('titel').value,
+                cursus: document.getElementById('cursus').value,
                 beschrijving: document.getElementById('beschrijving').value,
                 benodigd: document.getElementById('benodigd').value,
                 opleiding: document.getElementById('opleiding').value
             };
+
+            if (editingId) {
+                functies[editingId] = data;
+                alert('Functie bijgewerkt!');
+            } else {
+                const newId = Object.keys(functies).length > 0
+                    ? Math.max(...Object.keys(functies).map(Number)) + 1
+                    : 1;
+                functies[newId] = data;
+                alert('Functie toegevoegd!');
+            }
+
             save();
             render();
             document.getElementById('popup').classList.remove('active');
             document.getElementById('form').reset();
-            alert('Functie toegevoegd!');
+
+            // Re-show selected to update card
+            if (editingId) show(editingId);
+            editingId = null;
         };
     </script>
 </body>

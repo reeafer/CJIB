@@ -367,6 +367,37 @@
             });
         }
 
+        // Handle incoming selection from functies.html
+        window.onload = () => {
+            const selectionRaw = localStorage.getItem('routeplanner_selection');
+            if (selectionRaw) {
+                const selection = JSON.parse(selectionRaw);
+                const boxes = document.querySelectorAll('.box');
+
+                if (selection.type === 'functie') {
+                    flowTitle.textContent = selection.value.toUpperCase();
+                    // Update the FUNCTIE box (it's the first one in the split)
+                    boxes.forEach(box => {
+                        if (box.textContent === 'FUNCTIE') {
+                            box.textContent = selection.value.toUpperCase();
+                            box.style.background = '#8b7ba8'; // Highlight it
+                        }
+                    });
+                } else if (selection.type === 'cursus') {
+                    // Update the CURSUS box
+                    boxes.forEach(box => {
+                        if (box.textContent === 'CURSUS') {
+                            box.textContent = selection.value.toUpperCase();
+                            box.style.background = '#8b7ba8'; // Highlight it
+                        }
+                    });
+                }
+
+                // Clear selection so it doesn't persist on refresh
+                localStorage.removeItem('routeplanner_selection');
+            }
+        };
+
         const openBtn = document.getElementById('openSettings');
         const closeBtn = document.getElementById('closeSettings');
         const saveBtn = document.getElementById('saveSettings');
