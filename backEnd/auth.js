@@ -45,7 +45,8 @@ const Auth = {
         const roleDisplay = document.getElementById('userRoleDisplay');
         if (roleDisplay) {
             if (role) {
-                roleDisplay.textContent = 'Rol: ' + role;
+                const displayRole = (role.toLowerCase() === 'administrator' || role.toLowerCase() === 'admin') ? 'admin' : 'gebruiker';
+                roleDisplay.textContent = 'Rol: ' + displayRole;
             } else {
                 roleDisplay.textContent = 'Rol: Gast';
             }
