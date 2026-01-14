@@ -422,9 +422,12 @@
                     <span>Opleiding</span>
                     <span class="mbo-badge" id="cardOpleiding">MBO</span>
                 </div>
-                <div class="content-section" style="border-top: 1px solid rgba(255, 255, 255, 0.2);">
+                <div class="content-section"
+                    style="border-top: 1px solid rgba(255, 255, 255, 0.2); display: flex; gap: 10px;">
+                    <button class="add-function-btn" id="savePersonalBtn"
+                        style="margin: 0; flex: 1; background: var(--secondary);">Opslaan in Mijn Functies</button>
                     <button class="add-function-btn" id="planRouteBtn"
-                        style="margin: 0; width: 100%; background: #8b7ba8;">Bekijk Route in Planner</button>
+                        style="margin: 0; flex: 1; background: #8b7ba8;">Bekijk Route in Planner</button>
                 </div>
             </div>
         </div>
@@ -589,6 +592,19 @@
 
         document.getElementById('planRouteBtn').onclick = () => {
             window.location.href = 'routeplanner.html';
+        };
+
+        document.getElementById('savePersonalBtn').onclick = () => {
+            if (currentSelectedId) {
+                const saved = JSON.parse(localStorage.getItem('cjib_saved_personal')) || [];
+                if (!saved.includes(currentSelectedId)) {
+                    saved.push(currentSelectedId);
+                    localStorage.setItem('cjib_saved_personal', JSON.stringify(saved));
+                    alert('Functie opgeslagen in "Mijn Functies"!');
+                } else {
+                    alert('Deze functie is al opgeslagen.');
+                }
+            }
         };
 
         render();
