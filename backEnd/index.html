@@ -70,14 +70,17 @@
         .header {
             background: var(--bg);
             padding: 18px 40px;
-            gap: 15px;
+            gap: 20px;
             box-shadow: var(--shadow);
             z-index: 10;
+            display: flex;
+            align-items: center;
         }
 
         .logo-container {
             width: 80px;
             height: 80px;
+            padding: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -93,12 +96,14 @@
         .header-text h1 {
             font-size: 18px;
             font-weight: 600;
+            margin: 0;
         }
 
         .header-text p {
             font-size: 13px;
             color: var(--text-muted);
             font-style: italic;
+            margin: 2px 0 0 0;
         }
 
         /* Navbar */
@@ -106,6 +111,11 @@
             background: var(--secondary);
             justify-content: space-between;
             font-size: 14px;
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            /* matching header padding */
+            height: 50px;
         }
 
         .nav-item,
@@ -128,12 +138,16 @@
 
         .home-icon {
             font-size: 26px;
-            padding: 10px 22px;
+            padding: 0 22px;
+            display: flex;
+            align-items: center;
         }
 
         .nav-right {
             gap: 30px;
             padding-right: 30px;
+            display: flex;
+            align-items: center;
         }
 
         .user-icon {
