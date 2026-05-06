@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mijn Functies - Rijksoverheid</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background: #f5f5f5;
+        }
+
+        .header {
+            background: white;
+            padding: 20px 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+        }
+
+        .header-text h1 {
+            font-size: 19px;
+            color: #1a1a1a;
+            font-weight: 600;
+        }
+
+        .header-text p {
+            font-size: 13px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .navbar {
+            background: #a90061;
+            /* Unified violet background */
+            display: flex;
+            justify-content: space-between;
+            padding: 0;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-item {
+            padding: 12px 24px;
+            color: white;
+            /* White text for contrast on violet */
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s;
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-item.active {
+            background: rgba(0, 0, 0, 0.2);
+            font-weight: 600;
+        }
+
+        .home-icon {
+            font-size: 20px;
+            padding: 12px 24px;
+            cursor: pointer;
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 30px;
+            padding-right: 30px;
+            align-items: center;
+        }
+
+        .nav-right-item {
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .main-layout {
+            display: flex;
+            height: calc(100vh - 130px);
+        }
+
+        .sidebar {
+            width: 350px;
+            background: white;
+            border-right: 1px solid #ddd;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid #ddd;
+            background: #f9f9f9;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .function-list {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .function-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            transition: background 0.2s;
+        }
+
+        .function-item:hover {
+            background: #f5f5f5;
+        }
+
+        .function-item.active {
+            background: #a90061;
+            color: white;
+        }
+
+        .function-name {
+            flex: 1;
+            font-size: 14px;
+        }
+
+        .content-area {
+            flex: 1;
+            background: #e8e8e8;
+            position: relative;
+        }
+
+        .content-card {
+            position: absolute;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 400px;
+            background: #a90061;
+            color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .content-header {
+            padding: 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .content-header h2 {
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        .content-section {
+            padding: 20px 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .content-section h3 {
+            font-size: 15px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+
+        .content-section p {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .content-footer {
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .mbo-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .action-btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: opacity 0.2s;
+            margin: 0;
+            width: 100%;
+        }
+
+        .btn-remove {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn-planner {
+            background: #5a5a5a;
+            color: white;
+        }
+
+        .action-btn:hover {
+            opacity: 0.9;
+        }
+
+        .empty-state {
+            padding: 40px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* SVG Icons Style */
+        .svg-icon {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-left">
+            <img src="Logo_rijksoverheid.svg.png" alt="Logo" class="logo" style="object-fit: contain;">
+            <div class="header-text">
+                <h1>Rijksoverheid</h1>
+                <p>Ministerie van Justitie en Veiligheid</p>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="index.html" class="home-icon">
+                <svg viewBox="0 0 24 24" class="svg-icon">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+                </svg>
+            </a>
+            <a href="overons.html" class="nav-item">
+                <svg viewBox="0 0 24 24" class="svg-icon">
+                    <path
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
+                </svg>
+                over ons
+            </a>
+            <a href="functies.html" class="nav-item">
+                <svg viewBox="0 0 24 24" class="svg-icon">
+                    <path
+                        d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
+                </svg>
+                alle functies
+            </a>
+            <a href="opgeslagen.html" class="nav-item active">
+                <svg viewBox="0 0 24 24" class="svg-icon">
+                    <path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z" />
+                </svg>
+                Mijn Functies
+            </a>
+            <div class="nav-item" id="userRoleDisplay">Rol: Gast</div>
+        </div>
+        <div class="nav-right">
+            <div class="nav-right-item">
+                <svg viewBox="0 0 24 24" class="svg-icon">
+                    <path
+                        d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.46c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.07-.47 0-.59.22L3.09 10.2c-.12.21-.07.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.07.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
+                </svg>
+                instellingen
+            </div>
+            <div class="nav-right-item">🇳🇱 NL</div>
+            <div class="nav-right-item" id="loginLink">Inloggen</div>
+        </div>
+    </nav>
+    <script src="auth.js"></script>
+
+    <div class="main-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">Mijn Opgeslagen Functies</div>
+            <div class="function-list" id="functionList">
+                <!-- Wordt gevuld via JS -->
+            </div>
+        </aside>
+
+        <main class="content-area">
+            <div class="content-card" id="detailCard" style="display: none;">
+                <div class="content-header">
+                    <h2 id="cardTitle">Titel</h2>
+                </div>
+                <div class="content-section">
+                    <h3>Beschrijving</h3>
+                    <p id="cardDesc">Beschrijving</p>
+                </div>
+                <div class="content-section">
+                    <h3>Benodigdheden</h3>
+                    <p id="cardBenodigd">Benodigdheden</p>
+                </div>
+                <div class="content-footer">
+                    <span>Opleiding</span>
+                    <span class="mbo-badge" id="cardOpleiding">MBO</span>
+                </div>
+                <div class="content-section"
+                    style="border-top: 1px solid rgba(255, 255, 255, 0.2); display: flex; flex-direction: column; gap: 10px;">
+                    <button class="action-btn btn-planner" id="planRouteBtn">Bekijk Route in Planner</button>
+                    <button class="action-btn btn-remove" id="removeBtn">Verwijderen uit Mijn Functies</button>
+                </div>
+            </div>
+            <div id="noSelection" class="flex center"
+                style="height: 100%; color: #666; font-size: 18px; display: flex; align-items: center; justify-content: center;">
+                Selecteer een functie uit je lijst om details te zien.
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const functies = JSON.parse(localStorage.getItem('cjib_functies')) || {};
+        let savedIds = JSON.parse(localStorage.getItem('cjib_saved_personal')) || [];
+        let currentSelectedId = null;
+
+        function renderList() {
+            const list = document.getElementById('functionList');
+            list.innerHTML = '';
+
+            if (savedIds.length === 0) {
+                list.innerHTML = '<div class="empty-state">Je hebt nog geen functies opgeslagen.<br><br><a href="functies.html" style="color: #a90061; font-weight: 600;">Bekijk alle functies</a></div>';
+                document.getElementById('detailCard').style.display = 'none';
+                document.getElementById('noSelection').style.display = 'flex';
+                document.getElementById('noSelection').textContent = 'Geen opgeslagen functies gevonden.';
+                return;
+            }
+
+            savedIds.forEach(id => {
+                const f = functies[id];
+                if (!f) return;
+
+                const div = document.createElement('div');
+                div.className = 'function-item';
+                if (currentSelectedId == id) div.classList.add('active');
+
+                div.innerHTML = `
+                    <span class="function-name">${f.titel}</span>
+                    <span style="opacity: 0.5;">→</span>
+                `;
+
+                div.onclick = () => {
+                    document.querySelectorAll('.function-item').forEach(i => i.classList.remove('active'));
+                    div.classList.add('active');
+                    show(id);
+                };
+                list.appendChild(div);
+            });
+        }
+
+        function show(id) {
+            currentSelectedId = id;
+            const f = functies[id];
+            if (!f) return;
+
+            document.getElementById('detailCard').style.display = 'block';
+            document.getElementById('noSelection').style.display = 'none';
+
+            document.getElementById('cardTitle').textContent = f.titel;
+            document.getElementById('cardDesc').textContent = f.beschrijving;
+            document.getElementById('cardBenodigd').textContent = f.benodigd;
+            document.getElementById('cardOpleiding').textContent = f.opleiding;
+        }
+
+        document.getElementById('removeBtn').onclick = () => {
+            if (currentSelectedId) {
+                if (confirm('Weet je zeker dat je deze functie wilt verwijderen uit je lijst?')) {
+                    savedIds = savedIds.filter(id => id != currentSelectedId);
+                    localStorage.setItem('cjib_saved_personal', JSON.stringify(savedIds));
+                    currentSelectedId = null;
+                    renderList();
+                }
+            }
+        };
+
+        document.getElementById('planRouteBtn').onclick = () => {
+            if (currentSelectedId) {
+                const f = functies[currentSelectedId];
+                localStorage.setItem('routeplanner_selection', JSON.stringify({
+                    type: 'full',
+                    id: currentSelectedId,
+                    data: f
+                }));
+                window.location.href = 'routeplanner.html';
+            }
+        };
+
+        // Initial render
+        renderList();
+        if (savedIds.length > 0) {
+            // Select first one by default if possible
+            const firstItem = document.querySelector('.function-item');
+            if (firstItem) firstItem.click();
+        }
+    </script>
+</body>
+
+</html>

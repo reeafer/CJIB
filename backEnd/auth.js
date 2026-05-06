@@ -45,7 +45,8 @@ const Auth = {
         const roleDisplay = document.getElementById('userRoleDisplay');
         if (roleDisplay) {
             if (role) {
-                roleDisplay.textContent = 'Rol: ' + role;
+                const displayRole = (role.toLowerCase() === 'administrator' || role.toLowerCase() === 'admin') ? 'admin' : 'gebruiker';
+                roleDisplay.textContent = 'Rol: ' + displayRole;
             } else {
                 roleDisplay.textContent = 'Rol: Gast';
             }
@@ -54,22 +55,35 @@ const Auth = {
         // Update Login/Logout button
         const loginLink = document.getElementById('loginLink');
         if (loginLink) {
+            const loginSpan = loginLink.querySelector('[data-i18n="login"]');
             if (user) {
-                loginLink.innerHTML = `
-                    Uitloggen
-                    <div class="user-icon">👤</div>
-                `;
-                // Change onclick to logout
+                if (loginSpan) {
+                    loginSpan.setAttribute('data-i18n', 'logout');
+                    // Trigger translation if the global applyLang exists
+                    if (typeof applyLang === 'function') {
+                        applyLang(localStorage.getItem('lang') || 'nl');
+                    } else {
+                        loginSpan.textContent = 'Uitloggen';
+                    }
+                } else {
+                    loginLink.innerHTML = `Uitloggen <div class="user-icon">👤</div>`;
+                }
                 loginLink.onclick = (e) => {
-                    e.preventDefault(); // prevent navigation
+                    e.preventDefault();
                     e.stopPropagation();
                     this.logout();
                 };
             } else {
-                loginLink.innerHTML = `
-                    Inloggen
-                    <div class="user-icon">👤</div>
-                `;
+                if (loginSpan) {
+                    loginSpan.setAttribute('data-i18n', 'login');
+                    if (typeof applyLang === 'function') {
+                        applyLang(localStorage.getItem('lang') || 'nl');
+                    } else {
+                        loginSpan.textContent = 'Inloggen';
+                    }
+                } else {
+                    loginLink.innerHTML = `Inloggen <div class="user-icon">👤</div>`;
+                }
                 loginLink.onclick = () => {
                     window.location.href = 'login.html';
                 };
